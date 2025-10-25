@@ -1,4 +1,4 @@
-# Hi there 👋, I'm Nana Yaw
+# Hi there 👋, I'm Nana Yaw (Bright)
 
 💻 **AI Engineer | Backend Developer | Research Enthusiast**
 
