@@ -3,7 +3,7 @@
 💻 **AI Engineer | Backend Developer | Research Enthusiast**
 
 I build intelligent systems that connect **computer vision**, **machine learning**, and **cloud infrastructure** — from research prototypes to full production pipelines.  
-Strong advocate for 📜 **open source**, ☁️ **cloud deployment**, and 🤖 **AI-driven automation**.
+Strong advocate for 📜 **machine laerning**, ☁️ **cloud deployment**, **deep learning** and 🤖 **AI-driven automation**.
 
 ---
 
