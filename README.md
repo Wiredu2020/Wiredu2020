@@ -65,7 +65,7 @@ Strong advocate for 📜 **machine laerning**, ☁️ **cloud deployment**, **de
 | Platform | Link |
 |-----------|------|
 | 💼 **LinkedIn** | [linkedin.com/in/bright-wiredu-nuakoh-b24b02214](https://www.linkedin.com/in/bright-wiredu-nuakoh-b24b02214/) |
-| 🧠 **GitHub** | [github.com/Wiredu2020](https://github.com/Wiredu2020/) |
+| 🧠 **Website** | [nanawiredu.pythonanywhere.com](https://nanawiredu.pythonanywhere.com/) |
 | ✉️ **Email** | bryteredunuakoh@gmail.com |
 
 ---
