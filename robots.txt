@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://bright.github.io/al-folio/sitemap.xml
+Sitemap: https://Wiredu2020.github.io/al-folio/sitemap.xml
