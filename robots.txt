@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://Wiredu2020.github.io//sitemap.xml
+Sitemap: https://wiredu2020.github.io/Wiredu2020//sitemap.xml
