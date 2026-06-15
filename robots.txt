@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://bright.github.io/al-folio/sitemap.xml
