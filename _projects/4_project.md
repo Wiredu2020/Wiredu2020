@@ -1,13 +1,16 @@
 ---
 layout: page
-title: project 4
-description: another without an image
-img:
-importance: 3
-category: fun
+title: AI Follow-up Agent
+description: Autonomous LLM-based Task Management System
+img: assets/img/8.jpg
+importance: 4
+category: ai
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
+## Project Overview
+
+An intelligent AI agent that autonomously manages follow-up tasks and reminders using Large Language Models and natural language processing.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
 

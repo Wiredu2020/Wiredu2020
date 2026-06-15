@@ -1,25 +1,35 @@
 ---
 layout: page
-title: project 3 with very long name
-description: a project that redirects to another website
-img: assets/img/7.jpg
-redirect: https://www.wikipedia.org/
+title: Super-Resolution for Satellite Imagery
+description: Deep Learning Methods for Enhanced Satellite Image Resolution
+img: assets/img/6.jpg
 importance: 3
-category: work
+category: research
+related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Project Overview
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Thesis project (Mar 2024 - Jun 2024) at AIMS Rwanda implementing multiple deep learning approaches for satellite image super-resolution to improve remote sensing applications.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Methods Implemented
+
+- **SRCNN** (Super-Resolution Convolutional Neural Networks)
+- **EDSR** (Enhanced Deep Super-Resolution)
+- **SRGAN** (Super-Resolution Generative Adversarial Networks)
+
+## Applications
+
+- Improved satellite imagery resolution for better analysis
+- Environmental monitoring
+- Urban planning and development tracking
+- Agricultural assessment
+
+## Results
+
+- Quantitative evaluation using PSNR and SSIM metrics
+- Comparative analysis of different architectural approaches
+- Successfully enhanced satellite image quality for practical applications
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">

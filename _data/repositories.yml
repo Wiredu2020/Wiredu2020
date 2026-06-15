@@ -1,14 +1,13 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - Wiredu2020
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - Wiredu2020/3D-Computer-Vision-Robotics
+  - Wiredu2020/AI-Agents
+  - Wiredu2020/Deep-Learning-Projects
+  - Wiredu2020/Data-Science-Projects
+  - Wiredu2020/Computer-Vision-Pipeline
+  - Wiredu2020/Machine-Learning-Algorithms
+  - Wiredu2020/NLP-Solutions

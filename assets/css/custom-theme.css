@@ -1,0 +1,51 @@
+/* Custom Theme Override - Change Violet to Black */
+
+:root {
+  /* Override light theme violet colors to black */
+  --bs-primary: #000000;
+  --bs-primary-rgb: 0, 0, 0;
+}
+
+/* Light mode primary color override */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primary: #000000;
+    --color-primary-light: #1a1a1a;
+    --color-link: #000000;
+    --color-link-hover: #333333;
+  }
+  
+  a, .link, .text-primary {
+    color: #000000 !important;
+  }
+  
+  a:hover, .link:hover, .text-primary:hover {
+    color: #333333 !important;
+  }
+  
+  .btn-primary, .badge-primary {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+  }
+  
+  .btn-primary:hover, .badge-primary:hover {
+    background-color: #333333 !important;
+    border-color: #333333 !important;
+  }
+}
+
+/* Tailwind color overrides for light mode */
+.light {
+  --color-primary: #000000;
+}
+
+/* Active/selected states */
+.active, .is-active, [aria-current="page"] {
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+/* Headings and accents */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+}

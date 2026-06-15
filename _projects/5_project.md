@@ -1,13 +1,16 @@
 ---
 layout: page
-title: project 5
-description: a project with a background image
+title: Intelligent Chatbot System
+description: End-to-End Conversational AI Application
 img: assets/img/1.jpg
-importance: 3
-category: fun
+importance: 5
+category: ai
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
+## Project Overview
+
+A comprehensive chatbot system demonstrating full-stack implementation of conversational AI with natural language understanding and generation.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
 

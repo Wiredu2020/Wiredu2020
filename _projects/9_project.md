@@ -1,13 +1,16 @@
 ---
 layout: page
-title: project 9
-description: another project with an image 🎉
+title: Machine Learning Algorithms Implementation
+description: From-Scratch Implementations of Core ML Algorithms
 img: assets/img/6.jpg
-importance: 4
-category: fun
+importance: 9
+category: research
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
+## Project Overview
+
+Comprehensive implementation of fundamental machine learning algorithms from scratch to understand the underlying mathematics and principles.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
 

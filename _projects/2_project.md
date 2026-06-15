@@ -1,25 +1,35 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
+title: 3D Reconstruction for Wildlife Re-identification
+description: Deep Learning for Animal Identification from 2D Images
 img: assets/img/3.jpg
 importance: 2
-category: work
-giscus_comments: true
+category: research
+related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Project Overview
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Thesis project (Nov 2024 - Jun 2025) at LUT University implementing deep learning models for single-image 3D reconstruction of wildlife, aimed at boosting individual animal re-identification for conservation and monitoring.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Objectives
+
+- Create 3D models from single 2D wildlife images
+- Improve individual animal identification accuracy
+- Support wildlife conservation and monitoring applications
+
+## Technical Approach
+
+- Applied state-of-the-art deep learning models for 3D reconstruction
+- Implemented optimization algorithms for wildlife datasets
+- Tested on real-world wildlife imagery
+
+## Key Technologies
+
+- Deep Learning (PyTorch/TensorFlow)
+- 3D Computer Vision
+- CNN architectures for animal understanding
+- Optimization techniques
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">

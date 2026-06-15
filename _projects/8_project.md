@@ -1,14 +1,16 @@
 ---
 layout: page
-title: project 8
-description: an other project with a background image and giscus comments
+title: Full-Stack Web Applications
+description: End-to-End Web Development with Django and Modern Frontend
 img: assets/img/9.jpg
-importance: 2
-category: work
-giscus_comments: true
+importance: 8
+category: web
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
+## Project Overview
+
+Comprehensive web applications built with modern full-stack architecture including backend services, API development, and responsive frontend interfaces.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
 

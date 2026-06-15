@@ -1,33 +1,34 @@
 ---
 layout: page
-title: project 1
-description: with background image
+title: 3D Computer Vision & Robotics
+description: Robotic Workspace Calibration and Object Localization
 img: assets/img/12.jpg
 importance: 1
-category: work
+category: research
 related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Project Overview
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+This project implements a monocular camera-based robotic workspace calibration system using the Direct Linear Transform (DLT) algorithm for precise 3D object localization and robotic manipulation.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Key Features
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
+- **Camera Calibration**: Estimated camera projection matrix using known 3D world points and their 2D image projections
+- **3D Reconstruction**: Transformed 2D detected image points into 3D world coordinates
+- **Robotic Localization**: Enabled accurate robot localization for cube pick-and-place tasks
+- **Real-world Application**: Tested on actual robotic systems for validation
+
+## Technical Stack
+
+- Computer Vision algorithms (DLT, camera projection)
+- Python with OpenCV
+- Monocular camera vision
+- Robotic control systems
+
+## Impact
+
+Demonstrates practical application of computer vision principles in robotics, enabling precise manipulation without expensive multi-camera setups.
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>

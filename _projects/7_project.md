@@ -1,14 +1,16 @@
 ---
 layout: page
-title: project 7
-description: with background image
+title: Solar System Simulation
+description: Physics-based N-Body System Visualization
 img: assets/img/4.jpg
-importance: 1
-category: work
-related_publications: true
+importance: 7
+category: research
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
+## Project Overview
+
+A physics-based simulation of the solar system using mathematical principles of gravity and Newton's laws, with interactive 3D visualization.
 It's easy to include images in a flexible 3-column grid format.
 Make your photos 1/3, 2/3, or full width.
 
