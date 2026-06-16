@@ -1,83 +1,70 @@
-/* Custom Theme Override - Change Violet to Black */
+/* Custom Styles - Research Interests Boxes */
 
-:root {
-  /* Tailwind v4 color variables - override to black */
-  --color-primary: #000000;
-  --color-primary-50: #fafafa;
-  --color-primary-100: #f5f5f5;
-  --color-primary-200: #e5e5e5;
-  --color-primary-300: #d4d4d4;
-  --color-primary-400: #a3a3a3;
-  --color-primary-500: #737373;
-  --color-primary-600: #525252;
-  --color-primary-700: #404040;
-  --color-primary-800: #262626;
-  --color-primary-900: #171717;
-  --color-primary-950: #0a0a0a;
-  
-  /* Bootstrap override */
-  --bs-primary: #000000;
-  --bs-primary-rgb: 0, 0, 0;
-  
-  /* Accent colors */
-  --color-accent: #000000;
+.interest-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-/* Link colors */
-a,
-.link {
-  color: #000000 !important;
+.interest-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-a:hover,
-a:focus,
-.link:hover,
-.link:focus {
-  color: #333333 !important;
+.interest-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Navbar and navigation */
-nav a,
-.nav-link,
-.navbar-nav a {
-  color: #000000 !important;
+.interest-box.blue {
+  color: #0066cc;
+  border-color: #0066cc;
+  background-color: rgba(0, 102, 204, 0.08);
 }
 
-nav a:hover,
-.nav-link:hover,
-.navbar-nav a:hover {
-  color: #333333 !important;
+.interest-box.blue:hover {
+  background-color: rgba(0, 102, 204, 0.15);
 }
 
-/* Active navigation states */
-
-.nav-link.active {
-  color: #000000 !important;
-  border-color: #000000 !important;
+.interest-box.red {
+  color: #cc0033;
+  border-color: #cc0033;
+  background-color: rgba(204, 0, 51, 0.08);
 }
 
-/* Primary color classes */
-
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #000000;
+.interest-box.red:hover {
+  background-color: rgba(204, 0, 51, 0.15);
 }
 
-/* Active states */
-.active {
-  color: #000000 !important;
-  border-color: #000000 !important;
+.interest-box.teal {
+  color: #008080;
+  border-color: #008080;
+  background-color: rgba(0, 128, 128, 0.08);
 }
 
-/* Text selection */
-::selection {
-  background-color: #000000;
-  color: #ffffff;
+.interest-box.teal:hover {
+  background-color: rgba(0, 128, 128, 0.15);
+}
+
+.interest-box.green {
+  color: #228B22;
+  border-color: #228B22;
+  background-color: rgba(34, 139, 34, 0.08);
+}
+
+.interest-box.green:hover {
+  background-color: rgba(34, 139, 34, 0.15);
 }
 
 .interest-container {
