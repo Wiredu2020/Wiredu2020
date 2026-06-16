@@ -22,18 +22,15 @@ announcements:
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
+  enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
 
 Applied mathematician and data-centric engineer with interest in foundational **Machine Learning** and **Deep Learning**. The intersection of mathematics and computer science to create transformative AI solutions is of great interest to me.
 
----
 
-## About Me
-
-**Degrees:** Dual Master's degrees in **Data-Centric Engineering** (LUT University, Finland) and **Data Science** (AIMS Rwanda), along with a Bachelor's degree in Mathematics with Computer Science from the University of Ghana.
+**Degrees:** Dual Master's degrees in **Data-Centric Engineering** (LUT University, Finland) and **Data Science** (AIMS Rwanda), along with a Bachelor's degree in **Mathematics with Computer Science** from the University of Ghana.
 
 **Current Positions:** Tutor Fellow at <a href='https://aims.ac.rw/'> AIMS Rwanda</a>, ML Engineer at <a href='https://www.annologic.com/'> Annologic LLC, Ghana</a> and AI Expert at <a href='https://www.medirevs.com/'>Medirevs, Ghana</a>
 

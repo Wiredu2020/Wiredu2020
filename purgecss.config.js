@@ -23,18 +23,12 @@ module.exports = {
     // and page chrome (scroll-progress bar, ToC) bleeds through a zoomed image.
     "medium-zoom-overlay",
     "medium-zoom-image--opened",
-    // Custom theme color selectors - safelist to prevent purging
-    "color-primary",
-    "color-accent",
-    "text-primary",
-    "btn-primary",
-    "badge-primary",
-    "nav-link",
-    "navbar-nav",
-    "link",
-    "active",
-    "is-active",
-    "focus",
-    "underline",
+    // Research Interests custom styles
+    "interest-container",
+    "interest-box",
+    "blue",
+    "red",
+    "teal",
+    "green",
   ],
 };
