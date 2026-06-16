@@ -57,22 +57,6 @@ nav a:hover,
 }
 
 /* Primary color classes */
-.text-primary,
-.btn-primary,
-.badge-primary {
-  color: #000000 !important;
-}
-
-.btn-primary {
-  background-color: #000000 !important;
-  border-color: #000000 !important;
-  color: #ffffff !important;
-}
-
-.btn-primary:hover {
-  background-color: #333333 !important;
-  border-color: #333333 !important;
-}
 
 /* Headings */
 h1,
@@ -85,8 +69,7 @@ h6 {
 }
 
 /* Active states */
-.active,
-.is-active {
+.active {
   color: #000000 !important;
   border-color: #000000 !important;
 }
