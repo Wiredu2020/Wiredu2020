@@ -23,38 +23,44 @@
   --color-accent: #000000;
 }
 
-/* Override all violet/purple shades in light mode */
-:root {
-  color-scheme: light;
-}
-
 /* Link colors */
-a, .link {
+a,
+.link {
   color: #000000 !important;
 }
 
-a:hover, a:focus, .link:hover, .link:focus {
+a:hover,
+a:focus,
+.link:hover,
+.link:focus {
   color: #333333 !important;
 }
 
 /* Navbar and navigation */
-nav a, .nav-link, .navbar-nav a {
+nav a,
+.nav-link,
+.navbar-nav a {
   color: #000000 !important;
 }
 
-nav a:hover, .nav-link:hover, .navbar-nav a:hover {
+nav a:hover,
+.nav-link:hover,
+.navbar-nav a:hover {
   color: #333333 !important;
 }
 
-nav a[aria-current="page"], .nav-link.active {
+/* Active navigation states */
+nav a[aria-current="page"],
+.nav-link.active {
   color: #000000 !important;
   border-color: #000000 !important;
 }
 
 /* Primary color classes */
-.text-primary, .btn-primary, .badge-primary {
+.text-primary,
+.btn-primary,
+.badge-primary {
   color: #000000 !important;
-  background-color: transparent !important;
 }
 
 .btn-primary {
@@ -69,53 +75,113 @@ nav a[aria-current="page"], .nav-link.active {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #000000;
 }
 
 /* Active states */
-.active, .is-active, [aria-current="page"] {
+.active,
+.is-active {
   color: #000000 !important;
   border-color: #000000 !important;
 }
 
-/* Underlines and borders */
-a::after,
-.underline {
-  background-color: #000000 !important;
-}
-
-/* Focus states */
-a:focus,
-button:focus,
-.focus {
-  outline-color: #000000 !important;
-  border-color: #000000 !important;
-}
-
-/* Selection highlight */
+/* Text selection */
 ::selection {
   background-color: #000000;
   color: #ffffff;
 }
 
-::-moz-selection {
-  background-color: #000000;
-  color: #ffffff;
+.interest-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
-/* Dark mode adjustments if needed */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #ffffff;
-  }
-  
-  a, .link {
-    color: #ffffff !important;
-  }
-  
-  a:hover, .link:hover {
-    color: #cccccc !important;
-  }
+.interest-box {
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: inline-block;
+  cursor: default;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
 }
+
+/* Hover animation */
+.interest-box:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+}
+
+/* Strong modern colors */
+.blue {
+  background-color: #3b82f6;
+  color: white;
+}
+.purple {
+  background-color: #8b5cf6;
+  color: white;
+}
+.teal {
+  background-color: #14b8a6;
+  color: white;
+}
+.green {
+  background-color: #22c55e;
+  color: white;
+}
+.orange {
+  background-color: #f97316;
+  color: white;
+}
+.red {
+  background-color: #ef4444;
+  color: white;
+}
+
+.research-box {
+  position: relative;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 25px 20px 20px 20px;
+  margin-bottom: 35px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.research-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.research-box-title {
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  background-color: #2563eb;
+  color: white;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.research-box-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
