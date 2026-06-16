@@ -1,41 +1,151 @@
 /* Custom Theme Override - Change Violet to Black */
 
 :root {
-  /* Override light theme violet colors to black */
+  /* Tailwind v4 color variables - override to black */
+  --color-primary: #000000;
+  --color-primary-50: #fafafa;
+  --color-primary-100: #f5f5f5;
+  --color-primary-200: #e5e5e5;
+  --color-primary-300: #d4d4d4;
+  --color-primary-400: #a3a3a3;
+  --color-primary-500: #737373;
+  --color-primary-600: #525252;
+  --color-primary-700: #404040;
+  --color-primary-800: #262626;
+  --color-primary-900: #171717;
+  --color-primary-950: #0a0a0a;
+  
+  /* Bootstrap override */
   --bs-primary: #000000;
   --bs-primary-rgb: 0, 0, 0;
-}
-
-/* Light mode primary color override */
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-primary: #000000;
-    --color-primary-light: #1a1a1a;
-    --color-link: #000000;
-    --color-link-hover: #333333;
-  }
   
-  a, .link {
-    color: #000000 !important;
-  }
-  
-  a:hover, .link:hover {
-    color: #333333 !important;
-  }
+  /* Accent colors */
+  --color-accent: #000000;
 }
 
-/* Tailwind color overrides for light mode */
-.light {
-  --color-primary: #000000;
+/* Link colors */
+a,
+.link {
+  color: #000000 !important;
 }
 
-/* Active/selected states */
-.active {
+a:hover,
+a:focus,
+.link:hover,
+.link:focus {
+  color: #333333 !important;
+}
+
+/* Navbar and navigation */
+nav a,
+.nav-link,
+.navbar-nav a {
+  color: #000000 !important;
+}
+
+nav a:hover,
+.nav-link:hover,
+.navbar-nav a:hover {
+  color: #333333 !important;
+}
+
+/* Active navigation states */
+
+.nav-link.active {
   color: #000000 !important;
   border-color: #000000 !important;
 }
 
-/* Headings and accents */
-h1, h2, h3, h4, h5, h6 {
+/* Primary color classes */
+.text-primary,
+.btn-primary,
+.badge-primary {
+  color: #000000 !important;
+}
+
+.btn-primary {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.btn-primary:hover {
+  background-color: #333333 !important;
+  border-color: #333333 !important;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #000000;
+}
+
+/* Active states */
+.active,
+.is-active {
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+/* Text selection */
+::selection {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.interest-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.interest-box {
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: inline-block;
+  cursor: default;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Hover animation */
+.interest-box:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+}
+
+/* Strong modern colors */
+.blue {
+  background-color: #3b82f6;
+  color: white;
+}
+.purple {
+  background-color: #8b5cf6;
+  color: white;
+}
+.teal {
+  background-color: #14b8a6;
+  color: white;
+}
+.green {
+  background-color: #22c55e;
+  color: white;
+}
+.orange {
+  background-color: #f97316;
+  color: white;
+}
+.red {
+  background-color: #ef4444;
+  color: white;
 }
