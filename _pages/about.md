@@ -2,14 +2,14 @@
 layout: about
 title: about
 permalink: /
-subtitle: Data Scientist | ML Engineer | AI Expert | Mathematician
+subtitle: <a href='https://aims.ac.rw/'>African Institute for Mathematical Sciences (AIMS), Rwanda</a>
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p><strong>Email:</strong> bryteredunuako@gmail.com</p>
+    <p><strong>Email:</strong>bryteredunuako@gmail.com</p>
     <p><strong>Phone:</strong> +358 41 7244264</p>
     <p><strong>Location:</strong> Kigali, Rwanda</p>
 
@@ -27,10 +27,32 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am an applied mathematician and data scientist with a strong passion for leveraging machine learning and computer vision to address real-world challenges. With expertise in **Computer Vision**, **Deep Learning**, **Robotics**, and **Large Language Models (LLMs)**, I work at the intersection of mathematics and computer science to create transformative AI solutions.
+Applied mathematician and data-centric engineer with interest in foundational **Machine Learning** and **Deep Learning**. The intersection of mathematics and computer science to create transformative AI solutions is of great interest to me.
+
+---
 
 ## About Me
 
-I hold dual Master's degrees in **Data-Centric Engineering** (LUT University, Finland) and **Data Science** (African Institute for Mathematical Sciences, Rwanda), along with a Bachelor's degree in Mathematics with Computer Science from the University of Ghana. My research interests span computational mathematics, computer vision, high-performance computing, and AI applications in healthcare, agriculture, and education.
+**Degrees:** Dual Master's degrees in **Data-Centric Engineering** (LUT University, Finland) and **Data Science** (AIMS Rwanda), along with a Bachelor's degree in Mathematics with Computer Science from the University of Ghana.
 
-Currently, I work as an **AI Expert at Medirevs** (health-tech startup) and **Junior ML Engineer at Annologic LLC** in Ghana, where I develop machine learning solutions and AI systems. I am passionate about contributing to the field through innovative research and practical implementations that create positive societal impact.
+**Current Positions:** Tutor Fellow at <a href='https://aims.ac.rw/'> AIMS Rwanda</a>, ML Engineer at <a href='https://www.annologic.com/'> Annologic LLC, Ghana</a> and AI Expert at <a href='https://www.medirevs.com/'>Medirevs, Ghana</a>
+
+---
+
+<h3>Research Interests</h3>
+<div class="interest-container">
+  <span class="interest-box blue">Deep learning</span>
+  <span class="interest-box red">Spatial machine learning</span>
+  <span class="interest-box teal">applied mathematics & optimization</span>
+  <span class="interest-box green">3D computer vision</span>
+
+</div>
+
+---
+
+#### Looking Ahead
+
+I am actively seeking **doctoral opportunities** in
+scientific machine learning and  computational mathematics.
+
+---
