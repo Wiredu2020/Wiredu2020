@@ -14,7 +14,7 @@ calendar: true
   <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1rem;">
     <div>
       <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600;">
-        Teaching Assistant
+        Tutor Fellow
       </p>
       <p style="margin: 4px 0 0; font-size: 16px; font-weight: 700;">
         African Institute for Mathematical Sciences (AIMS), Rwanda
@@ -50,7 +50,53 @@ calendar: true
       <li>Participate in academic meetings and report on student progress.</li>
     </ul>
 
+  </div>
+
 </div>
+
+<hr style="max-width: 860px; margin: 1.5rem auto; border: none; border-top: 1px solid #ddd;">
+
+<div style="font-family: Georgia, serif; max-width: 860px; margin: 1.5rem auto;">
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1rem;">
+    <div>
+      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600;">
+        Teaching Assistant
+      </p>
+      <p style="margin: 4px 0 0; font-size: 16px; font-weight: 700;">
+        Department of Mathematics, University of Ghana
+      </p>
+    </div>
+    <span style="font-size: 13px; white-space: nowrap;">
+      Nov. 2020 – Aug. 2023
+    </span>
+  </div>
+
+  <div style="margin-bottom: 1rem;">
+    <p style="margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+      Courses Supported
+    </p>
+
+    <p style="margin: 0; font-size: 14px; line-height: 1.7;">
+      Calculus I &amp; II · Linear Algebra · Real Analysis ·
+      Ordinary Differential Equations · Probability and Statistics
+    </p>
+
+  </div>
+
+  <div>
+    <p style="margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+      Responsibilities
+    </p>
+
+    <ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7;">
+      <li>Led weekly tutorial sessions and problem-solving classes for undergraduate students.</li>
+      <li>Held office hours to clarify lecture material and assist with assignments.</li>
+      <li>Graded homework, quizzes, and exams, and provided detailed feedback.</li>
+      <li>Assisted lecturers in preparing course materials and exam questions.</li>
+    </ul>
+
+  </div>
 
 </div>
 
