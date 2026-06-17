@@ -1,6 +1,6 @@
 cv:
   name: Bright Wiredu Nuakoh
-  label: Data-Centric Engineering Graduate | AI & Computer Vision Researcher
+  label: Data-Centric Researcher
   email: bryteredunuakoh@gmail.com
   phone: "+358 41 7244264"
   location: 17KN 16Ave, Kiyovu
@@ -28,7 +28,7 @@ cv:
 
   sections:
     Education:
-      - institution: Lappeenranta-Lahti University of Technology (LUT)
+        institution: Lappeenranta-Lahti University of Technology (LUT)
         location: Lappeenranta, Finland
         url: https://www.lut.fi/
         area: Data-Centric Engineering
@@ -48,7 +48,7 @@ cv:
         # highlights:
         #   - "Supervisor: Assoc. Prof. Tuomas Eerola, LUT University"
 
-      - institution: African Institute for Mathematical Sciences (AIMS)
+        institution: African Institute for Mathematical Sciences (AIMS)
         location: Kigali, Rwanda
         url: https://aims.ac.rw/
         area: Mathematical Sciences
@@ -73,7 +73,7 @@ cv:
         # highlights:
         #   - "Supervisor: Dr. D.Sc. Abebe Geletu, German Researcher, AIMS"
 
-      - institution: University of Ghana
+        institution: University of Ghana
         location: Accra-Legon, Ghana
         url: https://www.ug.edu.gh/
         area: Mathematics with Computer Science
@@ -99,39 +99,24 @@ cv:
         #   - "Supervisor: Dr. Joseph K. Ansong, Senior Lecturer, University of Ghana"
 
     Experience:
-      - company: Annologic LLC
-        position: Junior ML Engineer
+        company: Annologic LLC
+        start_date: 2025-07
+        end_date: Current
+        position: ML Engineer
         location: Accra, Ghana
         highlights:
           - Applied AI models to data cleaning tasks within ETL pipelines on AWS.
           - Built a web scraping application using Selenium and FastAPI for a housing website.
 
-      - company: MEDIREVS
+        company: MEDIREVS
         position: Co-Founder
+        start_date: 2024-08
+        end_date: current
         location: Accra, Ghana
         highlights:
           - Developed a healthcare management system using Django for the backend architecture.
           - Integrated AI-driven features such as predictive analytics and automated diagnostics.
 
-    Teaching Experience:
-      - company: African Institute for Mathematical Sciences (AIMS), Rwanda
-        position: Tutor Fellow
-        location: Kigali, Rwanda
-        start_date: 2025-09
-        end_date: Present
-        highlights:
-          - Assisted faculty in teaching deep learning and programming courses.
-          - Discharged administrative duties such as grading assignments and managing student records.
-
-      - company: Department of Mathematics, University of Ghana
-        position: Teaching Assistant
-        location: Accra-Legon, Ghana
-        start_date: 2020-11-01
-        end_date: 2023-08-27
-        highlights:
-          - Assisted students with tutorials that reinforced concepts taught in class.
-          - Mentored students passionate about coding and programming.
-          - Discharged administrative duties such as attendance taking, grading assignments, and managing student records.
 
     Awards and Professional Affiliations:
       - title: Scholarship of Merit
