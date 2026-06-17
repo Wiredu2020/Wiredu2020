@@ -99,7 +99,7 @@ cv:
         #   - "Supervisor: Dr. Joseph K. Ansong, Senior Lecturer, University of Ghana"
 
     Experience:
-        company: Annologic LLC
+      - company: Annologic LLC
         start_date: 2025-07
         end_date: Current
         position: ML Engineer
@@ -108,7 +108,7 @@ cv:
           - Applied AI models to data cleaning tasks within ETL pipelines on AWS.
           - Built a web scraping application using Selenium and FastAPI for a housing website.
 
-        company: MEDIREVS
+      - company: MEDIREVS
         position: Co-Founder
         start_date: 2024-08
         end_date: current
