@@ -38,14 +38,13 @@ cv:
         score: ""
         thesis: "3D Reconstruction of Wild Animals for Re-identification"
         courses:
-        ```
           - "Advanced data analysis and machine learning"
           - "Pattern recognition and machine learning"
           - "Digital imaging and image processing"
           - "Machine vision and digital image analysis"
           - "3D computer vision"
           - "..."
-        ```
+
         # highlights:
         #   - "Supervisor: Assoc. Prof. Tuomas Eerola, LUT University"
 
@@ -58,7 +57,7 @@ cv:
         end_date: 2024-06
         score: ""
         thesis: "Super-Resolution Methods for Satellite Images Applications"
-        courses: ```
+        courses: 
           - "Data-driven optimization"
           - "Big data analytics with python"
           - "PDEs"
@@ -69,7 +68,7 @@ cv:
           - "Actuarial mathematics"
           - "Statistical regression"
           - "..."
-        ```
+  
 
         # highlights:
         #   - "Supervisor: Dr. D.Sc. Abebe Geletu, German Researcher, AIMS"
@@ -84,7 +83,6 @@ cv:
         score: ""
         thesis: "Traffic Flow Analysis with Python"
         courses: 
-        ```
           - "Calculus I & II"
           - "Linear Algebra"
           - "Differential Equations"
@@ -96,7 +94,7 @@ cv:
           - "Complex Analysis"
           - "Topology"
           - "..."
-        ```
+  
         # highlights:
         #   - "Supervisor: Dr. Joseph K. Ansong, Senior Lecturer, University of Ghana"
 
