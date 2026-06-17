@@ -28,7 +28,7 @@ cv:
 
   sections:
     Education:
-        institution: Lappeenranta-Lahti University of Technology (LUT)
+      - institution: Lappeenranta-Lahti University of Technology (LUT)
         location: Lappeenranta, Finland
         url: https://www.lut.fi/
         area: Data-Centric Engineering
@@ -48,7 +48,7 @@ cv:
         # highlights:
         #   - "Supervisor: Assoc. Prof. Tuomas Eerola, LUT University"
 
-        institution: African Institute for Mathematical Sciences (AIMS)
+      - institution: African Institute for Mathematical Sciences (AIMS)
         location: Kigali, Rwanda
         url: https://aims.ac.rw/
         area: Mathematical Sciences
@@ -73,7 +73,7 @@ cv:
         # highlights:
         #   - "Supervisor: Dr. D.Sc. Abebe Geletu, German Researcher, AIMS"
 
-        institution: University of Ghana
+      - institution: University of Ghana
         location: Accra-Legon, Ghana
         url: https://www.ug.edu.gh/
         area: Mathematics with Computer Science
