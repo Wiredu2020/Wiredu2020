@@ -5,13 +5,6 @@ cv:
   phone: "+358 41 7244264"
   location: 17KN 16Ave, Kiyovu
   image: ""
-  # summary: >
-  #   Data-Centric Engineering graduate from LUT with a strong passion for Mathematics and
-  #   Artificial Intelligence (AI). My mathematical background and programming skills enable
-  #   me to explore and apply AI models to solve problems across diverse fields. I am actively
-  #   involved in research, using deep learning frameworks like PyTorch and TensorFlow to
-  #   tackle complex challenges. I enjoy pitching my knowledge and ideas with fellow individuals
-  #   with a common passion.
 
   social_networks:
     - network: GitHub
@@ -45,9 +38,6 @@ cv:
           - "3D computer vision"
           - "..."
 
-        # highlights:
-        #   - "Supervisor: Assoc. Prof. Tuomas Eerola, LUT University"
-
       - institution: African Institute for Mathematical Sciences (AIMS)
         location: Kigali, Rwanda
         url: https://aims.ac.rw/
@@ -69,10 +59,6 @@ cv:
           - "Statistical regression"
           - "..."
   
-
-        # highlights:
-        #   - "Supervisor: Dr. D.Sc. Abebe Geletu, German Researcher, AIMS"
-
       - institution: University of Ghana
         location: Accra-Legon, Ghana
         url: https://www.ug.edu.gh/
@@ -94,15 +80,12 @@ cv:
           - "Complex Analysis"
           - "Topology"
           - "..."
-  
-        # highlights:
-        #   - "Supervisor: Dr. Joseph K. Ansong, Senior Lecturer, University of Ghana"
 
     Experience:
       - company: Annologic LLC
+        position: ML Engineer
         start_date: 2025-07
         end_date: Current
-        position: ML Engineer
         location: Accra, Ghana
         highlights:
           - Applied AI models to data cleaning tasks within ETL pipelines on AWS.
@@ -191,33 +174,3 @@ cv:
         awarder: Pastor Aponfi Memorial Ones (PAMO) Junior High
         date: ""
         summary: ""
-
-    # Workshops:
-    #   - title: "Vojtech Drahy's Talk: Design of Surrogate Models in Civil Engineering by Neural Networks"
-    #     awarder: LUT
-    #     date: 2024-09
-
-    #   - title: Hanga Pitch Fest
-    #     awarder: Rwanda
-    #     date: 2023-12
-
-    #   - title: Allotey Series
-    #     awarder: AIMS Ghana
-    #     date: 2022-11
-
-    #   - title: Starting a Career in Data Science
-    #     awarder: ""
-    #     date: 2021-05
-
-    # References:
-    #   - name: Prof. Blaise Tchapnda
-    #     icon: fa-solid fa-user-tie
-    #     reference: "Academic Director, AIMS Rwanda. Email: blaise.tchapnda@aims.ac.rw"
-
-    #   - name: Dr. Joseph K. Ansong
-    #     icon: fa-solid fa-user-tie
-    #     reference: "Head of Department, University of Ghana. Tel: +233 20 497 0962, Email: jkansong@ug.edu.gh"
-
-    #   - name: Dr. Lema Logamou Seknewna
-    #     icon: fa-solid fa-user-tie
-    #     reference: "AIMS Research and Innovation Center (RIC), Rwanda. Email: lema.seknewna@aims.ac.rw"
