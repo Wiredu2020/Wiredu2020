@@ -119,3 +119,39 @@
   background-color: #ef4444;
   color: white;
 }
+
+.research-box {
+  position: relative;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 25px 20px 20px 20px;
+  margin-bottom: 35px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.research-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.research-box-title {
+  position: absolute;
+  top: -14px;
+  left: 20px;
+  background-color: #2563eb;
+  color: white;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.research-box-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
