@@ -64,7 +64,7 @@ al_folio:
       enabled: true
   compat:
     bootstrap:
-      enabled: true
+      enabled: false
       support_window: v1.0-v1.2
       deprecates_in: v1.3
       removed_in: v2.0
