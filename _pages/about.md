@@ -45,6 +45,53 @@ Applied mathematician and data-centric engineer with interest in foundational **
   <span class="interest-box green">3D computer vision</span>
 </div>
 
+<style>
+.interest-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.interest-box {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 2px solid;
+  background: white;
+}
+
+/* Colors */
+.blue {
+  color: #0066e6;
+  border-color: #0066e6;
+}
+
+.red {
+  color: #e91e63;
+  border-color: #e91e63;
+}
+
+.teal {
+  color: #008b8b;
+  border-color: #008b8b;
+}
+
+.green {
+  color: #2e9d34;
+  border-color: #2e9d34;
+}
+
+h3 {
+  font-size: 2.3rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+</style>
+
 ---
 
 #### Looking Ahead
