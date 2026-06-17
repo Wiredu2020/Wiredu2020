@@ -49,18 +49,18 @@ Applied mathematician and data-centric engineer with interest in foundational **
 .interest-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 5px;
+  margin-top: 10px;
 }
 
 .interest-box {
   display: inline-flex;
   align-items: center;
-  padding: 14px 22px;
-  border-radius: 999px;
-  font-size: 18px;
-  font-weight: 600;
-  border: 2px solid;
+  padding: 10px 15px;
+  border-radius: 555px;
+  font-size: 15px;
+  font-weight: 400;
+  border: 1.5px solid;
   background: white;
 }
 
