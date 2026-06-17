@@ -79,7 +79,7 @@ calendar: true
 
     <p style="margin: 0; font-size: 14px; line-height: 1.7;">
       Calculus I &amp; II · Linear Algebra · Real Analysis ·
-      Ordinary Differential Equations · Probability and Statistics
+      Ordinary Differential Equations · Vectors and Mechanics · Vectors and Geometry · Algebra and Geometry
     </p>
 
   </div>
