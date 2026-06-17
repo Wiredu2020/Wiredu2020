@@ -174,3 +174,16 @@ cv:
         awarder: Pastor Aponfi Memorial Ones (PAMO) Junior High
         date: ""
         summary: ""
+
+    title: Academic Interests
+      type: nested_list
+      contents:
+        - title: machine learning and computer vision
+          items:
+            - applied machine learning - health
+            - mathematics for machine learning
+            - extend computer vision for signal and image processing
+        - title: mathematics
+          items:
+            - modeling
+            - bayesian and uncertainty quantification
