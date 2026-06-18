@@ -102,14 +102,14 @@ cv:
 
 
     Awards and Professional Affiliations:
-      - title: Scholarship of Merit
-        awarder: Lappeenranta-Lahti University of Technology (LUT)
-        date: 2024
+      - name: Scholarship of Merit
+        date: "2024"
+        location: Lappeenranta-Lahti University of Technology (LUT), Finland
         summary: Merit-based scholarship, Finland, 2024-2025.
 
-      - title: Scholarship of Merit
-        awarder: African Institute for Mathematical Sciences (AIMS)
-        date: 2023
+      - name: Scholarship of Merit
+        date: "2023"
+        location: African Institute for Mathematical Sciences (AIMS), Rwanda
         summary: Merit-based scholarship, Rwanda, 2023-2024.
 
     Skills:
@@ -160,30 +160,21 @@ cv:
         icon: fa-solid fa-laptop-code
 
     Leadership:
-      - title: Vice President
-        awarder: The Mathematics Society, University of Ghana
-        date: 2022
+      - name: Vice President
+        date: "2022"
+        location: The Mathematics Society, University of Ghana
         summary: Served as Vice President during the 2022 academic year.
 
-      - title: Co-Head, Solution Space Committee (Academic Board Head)
-        awarder: The Mathematics Society, University of Ghana
-        date: 2020
+      - name: Co-Head, Solution Space Committee (Academic Board Head)
+        date: "2020"
+        location: The Mathematics Society, University of Ghana
         summary: Served from 2020 to 2021.
 
-      - title: Boys' Head Prefect
-        awarder: Pastor Aponfi Memorial Ones (PAMO) Junior High
+      - name: Boys' Head Prefect
         date: ""
+        location: Pastor Aponfi Memorial Ones (PAMO) Junior High
         summary: ""
 
-    title: Academic Interests
-      type: nested_list
-      contents:
-        - title: machine learning and computer vision
-          items:
-            - applied machine learning - health
-            - mathematics for machine learning
-            - extend computer vision for signal and image processing
-        - title: mathematics
-          items:
-            - modeling
-            - bayesian and uncertainty quantification
+    Academic Interests:
+      - bullet: "Machine learning and computer vision: applied ML for health, mathematics for ML, computer vision for signal and image processing"
+      - bullet: "Mathematics: modeling, bayesian and uncertainty quantification"
