@@ -4,7 +4,7 @@ title: Intelligent Chatbot System
 description: End-to-End Conversational AI Application
 img: assets/img/1.jpg
 importance: 5
-category: work
+category: ai
 related_publications: false
 ---
 

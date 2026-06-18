@@ -4,7 +4,7 @@ title: AI Follow-up Agent
 description: Autonomous LLM-based Task Management System
 img: assets/img/8.jpg
 importance: 4
-category: work
+category: ai
 related_publications: false
 ---
 

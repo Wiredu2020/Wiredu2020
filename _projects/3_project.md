@@ -4,7 +4,7 @@ title: Super-Resolution for Satellite Imagery
 description: Deep Learning Methods for Enhanced Satellite Image Resolution
 img: assets/img/6.jpg
 importance: 3
-category: work
+category: research
 related_publications: true
 ---
 

@@ -4,7 +4,7 @@ title: Full-Stack Web Applications
 description: End-to-End Web Development with Django and Modern Frontend
 img: assets/img/9.jpg
 importance: 8
-category: work
+category: web
 related_publications: false
 ---
 

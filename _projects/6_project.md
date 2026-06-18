@@ -4,7 +4,7 @@ title: Traffic Flow Analysis System
 description: Time-Series Analysis of Urban Traffic Patterns
 img: assets/img/11.jpg
 importance: 6
-category: work
+category: research
 related_publications: true
 ---
 

@@ -4,7 +4,7 @@ title: 3D Reconstruction for Wildlife Re-identification
 description: Deep Learning for Animal Identification from 2D Images
 img: assets/img/3.jpg
 importance: 2
-category: work
+category: research
 related_publications: true
 ---
 
