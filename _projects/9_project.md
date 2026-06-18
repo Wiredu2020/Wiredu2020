@@ -4,7 +4,7 @@ title: Machine Learning Algorithms Implementation
 description: From-Scratch Implementations of Core ML Algorithms
 img: assets/img/6.jpg
 importance: 9
-category: research
+category: work
 related_publications: false
 ---
 

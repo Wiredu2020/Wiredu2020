@@ -4,7 +4,7 @@ title: Solar System Simulation
 description: Physics-based N-Body System Visualization
 img: assets/img/4.jpg
 importance: 7
-category: research
+category: fun
 related_publications: false
 ---
 

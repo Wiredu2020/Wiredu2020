@@ -4,7 +4,7 @@ title: 3D Computer Vision & Robotics
 description: Robotic Workspace Calibration and Object Localization
 img: assets/img/12.jpg
 importance: 1
-category: research
+category: work
 related_publications: true
 ---
 
