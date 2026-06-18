@@ -1,10 +1,8 @@
 cv:
   name: Bright Wiredu Nuakoh
-  label: Data-Centric Researcher
   email: bryteredunuakoh@gmail.com
   phone: "+358 41 7244264"
-  location: 17KN 16Ave, Kiyovu
-  image: ""
+  location: Kiyovu, Kigali, Rwanda
 
   social_networks:
     - network: GitHub
@@ -12,80 +10,56 @@ cv:
     - network: LinkedIn
       username: bright-wiredu-nuakoh-b24b02214
 
-  address:
-    street: 17KN 16Ave
-    city: Kiyovu, Kigali
-    region: Kigali
-    postalCode: ""
-    countryCode: RW
-
   sections:
     Education:
       - institution: Lappeenranta-Lahti University of Technology (LUT)
         location: Lappeenranta, Finland
-        url: https://www.lut.fi/
         area: Data-Centric Engineering
-        studyType: Master of Science
+        degree: Master of Science
         start_date: 2024-08
         end_date: 2025-07
-        score: ""
-        thesis: "3D Reconstruction of Wild Animals for Re-identification"
-        courses:
+        summary: "Thesis: 3D Reconstruction of Wild Animals for Re-identification"
+        highlights:
           - "Advanced data analysis and machine learning"
           - "Pattern recognition and machine learning"
           - "Digital imaging and image processing"
           - "Machine vision and digital image analysis"
           - "3D computer vision"
-          - "..."
 
       - institution: African Institute for Mathematical Sciences (AIMS)
         location: Kigali, Rwanda
-        url: https://aims.ac.rw/
         area: Mathematical Sciences
-        studyType: Master of Science
+        degree: Master of Science
         start_date: 2023-08
         end_date: 2024-06
-        score: ""
-        thesis: "Super-Resolution Methods for Satellite Images Applications"
-        courses: 
+        summary: "Thesis: Super-Resolution Methods for Satellite Images Applications"
+        highlights:
           - "Data-driven optimization"
           - "Big data analytics with python"
-          - "PDEs"
           - "Statistical machine learning"
           - "Interpretable machine learning"
-          - " Financial mathematics"
+          - "Financial mathematics"
           - "Stochastic processes"
-          - "Actuarial mathematics"
           - "Statistical regression"
-          - "..."
-  
+
       - institution: University of Ghana
         location: Accra-Legon, Ghana
-        url: https://www.ug.edu.gh/
         area: Mathematics with Computer Science
-        studyType: Bachelor of Science
+        degree: Bachelor of Science
         start_date: 2018-08
         end_date: 2022-11
-        score: ""
-        thesis: "Traffic Flow Analysis with Python"
-        courses: 
-          - "Calculus I & II"
-          - "Linear Algebra"
-          - "Differential Equations"
-          - "Probability and Statistics"
-          - "Numerical Analysis"
-          - "Mathematical Modelling"
-          - "Abstract Algebra"
-          - "Analysis I & II"
-          - "Complex Analysis"
-          - "Topology"
-          - "..."
+        summary: "Thesis: Traffic Flow Analysis with Python"
+        highlights:
+          - "Calculus I & II, Linear Algebra, Differential Equations"
+          - "Probability and Statistics, Numerical Analysis"
+          - "Mathematical Modelling, Abstract Algebra"
+          - "Analysis I & II, Complex Analysis, Topology"
 
     Experience:
       - company: Annologic LLC
         position: ML Engineer
         start_date: 2025-07
-        end_date: Current
+        end_date: "present"
         location: Accra, Ghana
         highlights:
           - Applied AI models to data cleaning tasks within ETL pipelines on AWS.
@@ -94,7 +68,7 @@ cv:
       - company: MEDIREVS
         position: Co-Founder
         start_date: 2024-08
-        end_date: current
+        end_date: "present"
         location: Accra, Ghana
         highlights:
           - Developed a healthcare management system using Django for the backend architecture.
@@ -160,21 +134,17 @@ cv:
         icon: fa-solid fa-laptop-code
 
     Leadership:
-      - name: Vice President
-        date: "2022"
-        location: The Mathematics Society, University of Ghana
-        summary: Served as Vice President during the 2022 academic year.
+      - label: "Vice President"
+        details: "The Mathematics Society, University of Ghana (2022)"
 
-      - name: Co-Head, Solution Space Committee (Academic Board Head)
-        date: "2020"
-        location: The Mathematics Society, University of Ghana
-        summary: Served from 2020 to 2021.
+      - label: "Co-Head, Solution Space Committee (Academic Board Head)"
+        details: "The Mathematics Society, University of Ghana (2020–2021)"
 
-      - name: Boys' Head Prefect
-        date: ""
-        location: Pastor Aponfi Memorial Ones (PAMO) Junior High
-        summary: ""
+      - label: "Boys' Head Prefect"
+        details: "Pastor Aponfi Memorial Ones (PAMO) Junior High"
 
     Academic Interests:
-      - bullet: "Machine learning and computer vision: applied ML for health, mathematics for ML, computer vision for signal and image processing"
-      - bullet: "Mathematics: modeling, bayesian and uncertainty quantification"
+      - label: "Machine Learning & Computer Vision"
+        details: "Applied ML for health, mathematics for ML, computer vision for signal and image processing"
+      - label: "Mathematics"
+        details: "Modeling, Bayesian and uncertainty quantification"
