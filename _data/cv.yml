@@ -75,15 +75,15 @@ cv:
           - Integrated AI-driven features such as predictive analytics and automated diagnostics.
 
 
-    Awards and Professional Affiliations:
-      - name: Scholarship of Merit
+    Awards:
+      - title: Scholarship of Merit
         date: "2024"
-        location: Lappeenranta-Lahti University of Technology (LUT), Finland
+        awarder: Lappeenranta-Lahti University of Technology (LUT), Finland
         summary: Merit-based scholarship, Finland, 2024-2025.
 
-      - name: Scholarship of Merit
+      - title: Scholarship of Merit
         date: "2023"
-        location: African Institute for Mathematical Sciences (AIMS), Rwanda
+        awarder: African Institute for Mathematical Sciences (AIMS), Rwanda
         summary: Merit-based scholarship, Rwanda, 2023-2024.
 
     Skills:
@@ -144,7 +144,12 @@ cv:
         details: "Pastor Aponfi Memorial Ones (PAMO) Junior High"
 
     Academic Interests:
-      - label: "Machine Learning & Computer Vision"
-        details: "Applied ML for health, mathematics for ML, computer vision for signal and image processing"
-      - label: "Mathematics"
-        details: "Modeling, Bayesian and uncertainty quantification"
+      - name: "Machine Learning & Computer Vision"
+        keywords:
+          - "Applied ML for health"
+          - "mathematics for ML"
+          - "computer vision for signal and image processing"
+      - name: "Mathematics"
+        keywords:
+          - "Modeling"
+          - "Bayesian and uncertainty quantification"
