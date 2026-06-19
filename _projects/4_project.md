@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Advanced CVPR for Biometrics
-description: Facial Emotion Recognition using EfficientNetB3, VGG16, Neural ODEs, and classical CV pipelines
+description: Facial Emotion Recognition using EfficientNetB3, VGG16, and classical CV pipelines
 img: assets/img/bios.png
 importance: 2
 category: research
