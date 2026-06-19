@@ -1,0 +1,6 @@
+// Override light-mode theme color from violet to black.
+// The dark mode (html[data-theme="dark"]) keeps its cyan color from the gem's _themes.scss.
+:root {
+  --global-theme-color: #000000;
+  --global-hover-color: #000000;
+}
