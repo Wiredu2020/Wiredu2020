@@ -1,0 +1,471 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction | Bright Wiredu </title> <meta name="author" content="Bright Wiredu Nuakoh"> <meta name="description" content="Understanding SVD theory and applying it to hyperspectral imaging - A comprehensive guide"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/Wiredu2020/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/Wiredu2020/assets/img/favicon.ico?v=113bf03c0ecd43b1794a60b109bf8ab8"> <link rel="stylesheet" href="/Wiredu2020/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://wiredu2020.github.io/Wiredu2020/blog/2025/svd_blog_extended/"> <script src="/Wiredu2020/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/Wiredu2020//"> Bright Wiredu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/Wiredu2020/blog/">blogs </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/repositories/">repos </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/teaching/">teaching experience </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction</h1> <p class="post-meta"> Created on January 12, 2025 </p> <p class="post-tags"> <a href="/Wiredu2020/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/Wiredu2020/blog/tag/linear-algebra"> <i class="fa-solid fa-hashtag fa-sm"></i> linear-algebra,</a>   <a href="/Wiredu2020/blog/tag/svd"> <i class="fa-solid fa-hashtag fa-sm"></i> svd,</a>   <a href="/Wiredu2020/blog/tag/hyperspectral-dimensionality-reduction"> <i class="fa-solid fa-hashtag fa-sm"></i> hyperspectral,dimensionality-reduction</a>   ·   <a href="/Wiredu2020/blog/category/sample-posts"> <i class="fa-solid fa-tag fa-sm"></i> sample-posts</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="introduction-to-hyperspectral-imaging">Introduction to Hyperspectral Imaging</h2> <p>Hyperspectral imaging is like having a camera with hundreds of colored filters. While a regular camera captures red, green, and blue (3 channels), a hyperspectral camera captures hundreds of narrow wavelength bands across the electromagnetic spectrum. This creates an image “cube” - two spatial dimensions and one spectral dimension.</p> <p><strong>Why is this useful?</strong> Different materials reflect and absorb light differently across wavelengths. For example:</p> <ul> <li>Healthy vegetation reflects strongly in near-infrared</li> <li>Different minerals have unique spectral signatures</li> <li>Water bodies absorb differently than soil</li> </ul> <p><strong>The challenge:</strong> A single hyperspectral image can contain millions of data points, making it expensive to store, transmit, and analyze. This is where <strong>dimensionality reduction</strong> becomes critical.</p> <hr> <h2 id="what-is-singular-value-decomposition-svd">What is Singular Value Decomposition (SVD)?</h2> <h3 id="the-big-picture">The Big Picture</h3> <p>Imagine you have a large, complex dataset represented as a matrix. SVD is a mathematical technique that decomposes this matrix into three simpler matrices that, when multiplied together, reconstruct the original data. The magic is that <strong>most of the important information is concentrated in just a few components</strong>, allowing us to throw away the less important parts.</p> <p>Think of it like compressing a high-resolution image: you can often reduce file size by 90% while keeping the image looking almost identical to the human eye.</p> <h3 id="the-mathematical-framework">The Mathematical Framework</h3> <p>For any matrix $X$ of size $m\times n$, SVD decomposes it as:</p> \[\mathbf{X} = \mathbf{U}\mathbf{\Sigma}\mathbf{V}^\top\] <p>Let’s break down each component:</p> <p><strong>U (Left Singular Vectors)</strong> - size m × m</p> <ul> <li>Columns are orthonormal vectors (perpendicular and unit length)</li> <li>Represent patterns in the <strong>rows</strong> of X (spatial patterns in our case)</li> <li>Think of these as “basis images” or “eigenimages”</li> </ul> <p><strong>$\Sigma$ (Singular Values)</strong> - size $m \times n$ (diagonal matrix)</p> <ul> <li>Diagonal elements $\sigma_1 \ge \sigma_2 \ge\sigma_3 \ge\sigma_4 \ge \ldots \ge 0$ (sorted in descending order)</li> <li>Measure the “strength” or “importance” of each component</li> <li>Large values = important patterns, small values = noise or fine details</li> <li>The rank $r$ is the number of non-zero singular values</li> </ul> <p><strong>V (Right Singular Vectors)</strong> - size $n \times n$</p> <ul> <li>Columns are orthonormal vectors</li> <li>Represent patterns in the <strong>columns</strong> of X (spectral patterns in our case)</li> <li>Show how different wavelengths relate to each other</li> </ul> <h3 id="why-svd-is-special">Why SVD is Special</h3> <p>SVD has unique mathematical properties that make it perfect for data analysis:</p> <ol> <li> <strong>Unique and stable</strong>: For any matrix, the SVD is unique (up to sign)</li> <li> <strong>Optimal approximation</strong>: Truncated SVD gives the best low-rank approximation in terms of minimizing error</li> <li> <strong>Reveals structure</strong>: Singular values tell us the “intrinsic dimensionality” of the data</li> <li> <strong>Works on any matrix</strong>: Unlike eigendecomposition, SVD works on non-square and non-symmetric matrices</li> </ol> <hr> <h2 id="understanding-svd-through-intuition">Understanding SVD Through Intuition</h2> <h3 id="geometric-interpretation">Geometric Interpretation</h3> <p>Think of SVD as finding the “principal axes” of your data:</p> <ol> <li> <strong>First component</strong> (largest $\sigma_1$): The direction of maximum variation in your data</li> <li> <strong>Second component</strong> ($\sigma_2$): The direction of maximum variation orthogonal to the first</li> <li> <strong>Third component</strong> ($\sigma_3$): Maximum variation orthogonal to both previous directions</li> <li>And so on…</li> </ol> <p>Each component is <strong>independent</strong> (orthogonal) to all others, so they capture different aspects of the data.</p> <h3 id="the-low-rank-approximation">The Low-Rank Approximation</h3> <p>Here’s the key insight: instead of using all components, we can use only the first k components:</p> \[\mathbf{X}_k = \mathbf{U}_k\mathbf{\Sigma}_k\mathbf{V}_k^\top\] <p>where:</p> <ul> <li> <strong>U</strong>ₖ contains only the first k columns of <strong>U</strong> </li> <li>$\Sigma$ contains only the first k singular values</li> <li> <strong>V</strong>ₖ contains only the first k columns of <strong>V</strong> </li> </ul> <p>This is called <strong>truncated SVD</strong> or <strong>rank-k approximation</strong>.</p> <p><strong>Why does this work?</strong> Because singular values are sorted by importance, the first few components capture most of the variance in the data, while later components often represent noise or insignificant details.</p> <hr> <h2 id="svd-vs-pca-whats-the-connection">SVD vs PCA: What’s the Connection?</h2> <p>You might have heard of Principal Component Analysis (PCA). Here’s the relationship:</p> <p><strong>PCA and SVD are intimately related:</strong></p> <ul> <li>PCA finds directions of maximum variance by computing eigenvectors of the covariance matrix</li> <li>SVD directly decomposes the data matrix</li> <li><strong>For centered data, PCA and SVD give the same results</strong></li> </ul> <p>Specifically:</p> <ul> <li>The columns of <strong>V</strong> are the principal components</li> <li>The singular values $\sigma_i$ relate to eigenvalues: $\lambda_i = \sigma_i^2/(n-1)$</li> <li> <strong>U</strong> gives the data projected onto principal components</li> </ul> <p><strong>Advantage of SVD over PCA:</strong></p> <ul> <li>More numerically stable</li> <li>Doesn’t require computing the covariance matrix (which can be large)</li> <li>Directly applicable to the data matrix</li> </ul> <hr> <h2 id="measuring-information-content-explained-variance">Measuring Information Content: Explained Variance</h2> <p>How do we decide how many components to keep? We use <strong>explained variance</strong>.</p> <h3 id="computing-explained-variance">Computing Explained Variance</h3> <p>The variance explained by the i-th component is:</p> \[\text{EV}_i = \frac{\sigma_i^2}{\sum_{j=1}^{r} \sigma_j^2}\] <p><strong>Cumulative explained variance</strong> up to component k:</p> \[\text{CV}_k = \frac{\sum_{i=1}^{k} \sigma_i^2}{\sum_{j=1}^{r} \sigma_j^2}\] <p>This tells us: <strong>“What percentage of the total information is captured by the first k components?”</strong></p> <h3 id="choosing-the-number-of-components">Choosing the Number of Components</h3> <p>Common strategies:</p> <ol> <li> <strong>Threshold method</strong>: Keep enough components to capture 95% or 99% of variance</li> <li> <strong>Elbow method</strong>: Plot variance vs. component number, look for the “elbow” where adding more components gives diminishing returns</li> <li> <strong>Cross-validation</strong>: Choose k that gives best performance on validation data</li> <li> <strong>Fixed number</strong>: Use domain knowledge (e.g., “keep 10 components”)</li> </ol> <p>For our hyperspectral data, we’ll use the threshold method with 99% variance retention.</p> <hr> <h2 id="application-to-hyperspectral-imaging">Application to Hyperspectral Imaging</h2> <h3 id="the-indian-pines-dataset">The Indian Pines Dataset</h3> <p>The Indian Pines dataset is a benchmark hyperspectral image collected over agricultural land in Indiana, USA. It contains:</p> <ul> <li> <strong>Spatial dimensions</strong>: $145 \times 145$ pixels</li> <li> <strong>Spectral dimension</strong>: 220 wavelength bands</li> <li> <strong>Total elements</strong>: $145 \times 145 \times 220 = 4,625,500$ values</li> </ul> <p>This represents different crop types, forests, roads, and buildings, each with unique spectral signatures.</p> <h3 id="why-apply-svd-to-hyperspectral-data">Why Apply SVD to Hyperspectral Data?</h3> <p>Hyperspectral images are highly redundant because:</p> <ol> <li> <strong>Spectral correlation</strong>: Adjacent wavelength bands are highly correlated</li> <li> <strong>Spatial correlation</strong>: Nearby pixels often have similar spectra</li> <li> <strong>Noise</strong>: Some bands contain primarily noise</li> </ol> <p>SVD exploits this redundancy to:</p> <ul> <li> <strong>Compress</strong> the data for storage and transmission</li> <li> <strong>Denoise</strong> by removing low-variance components</li> <li> <strong>Visualize</strong> high-dimensional data</li> <li> <strong>Preprocess</strong> for machine learning algorithms</li> </ul> <hr> <h2 id="methodology-and-implementation">Methodology and Implementation</h2> <h3 id="1-data-loading-and-preprocessing">1: Data Loading and Preprocessing</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Load the hyperspectral data</span>
+<span class="nb">load</span><span class="p">(</span><span class="s1">'indian_pines.mat'</span><span class="p">);</span>
+
+<span class="c1">% Extract the datacube and wavelength information</span>
+<span class="n">datacube</span> <span class="o">=</span> <span class="n">indian_pines</span><span class="o">.</span><span class="n">DataCube</span><span class="p">;</span>  <span class="c1">% 145 × 145 × 220</span>
+<span class="n">wavelengths</span> <span class="o">=</span> <span class="n">indian_pines</span><span class="o">.</span><span class="n">Wavelength</span><span class="p">;</span>  <span class="c1">% 220 × 1</span>
+
+<span class="c1">% Display dimensions</span>
+<span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">bands</span><span class="p">]</span> <span class="o">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">datacube</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Image size: %d × %d pixels\n'</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Number of spectral bands: %d\n'</span><span class="p">,</span> <span class="n">bands</span><span class="p">);</span>
+</code></pre></div></div> <h3 id="2-rgb-visualization">2: RGB Visualization</h3> <p>To visualize the hyperspectral cube as an RGB image, we select three representative bands:</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Select bands for RGB (approximate wavelengths)</span>
+<span class="n">red_band</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>    <span class="c1">% ~650 nm</span>
+<span class="n">green_band</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>  <span class="err">#</span> <span class="o">~</span><span class="mi">550</span> <span class="n">nm</span>
+<span class="n">blue_band</span> <span class="o">=</span> <span class="mi">17</span><span class="p">;</span>   <span class="err">#</span> <span class="o">~</span><span class="mi">450</span> <span class="n">nm</span>
+
+<span class="c1">% Extract and normalize</span>
+<span class="n">rgb_image</span> <span class="o">=</span> <span class="nb">cat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">red_band</span><span class="p">),</span> <span class="k">...</span>
+                   <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">green_band</span><span class="p">),</span> <span class="k">...</span>
+                   <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">blue_band</span><span class="p">));</span>
+<span class="n">rgb_image</span> <span class="o">=</span> <span class="n">rgb_image</span> <span class="p">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">(:));</span>
+
+<span class="c1">% Display</span>
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">imshow</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s1">'RGB Visualization of Hyperspectral Image'</span><span class="p">);</span>
+</code></pre></div></div> <h3 id="3-false-color-composite">3: False-Color Composite</h3> <p>False-color images use non-visible wavelengths to highlight features:</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Select NIR, Red, Green for false-color (vegetation analysis)</span>
+<span class="n">nir_band</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>   <span class="c1">% Near-infrared</span>
+<span class="n">red_band</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="n">green_band</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>
+
+<span class="c1">% Create false-color composite</span>
+<span class="n">false_color</span> <span class="o">=</span> <span class="nb">cat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">nir_band</span><span class="p">),</span> <span class="k">...</span>
+                     <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">red_band</span><span class="p">),</span> <span class="k">...</span>
+                     <span class="n">datacube</span><span class="p">(:,:,</span><span class="n">green_band</span><span class="p">));</span>
+
+<span class="c1">% Apply contrast stretching</span>
+<span class="n">false_color</span> <span class="o">=</span> <span class="n">imadjust</span><span class="p">(</span><span class="n">false_color</span> <span class="p">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">false_color</span><span class="p">(:)));</span>
+
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">imshow</span><span class="p">(</span><span class="n">false_color</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s1">'False-Color Composite (NIR-R-G)'</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>Why false-color?</strong> Vegetation reflects strongly in near-infrared but absorbs red light. In false-color, healthy vegetation appears bright red!</p> <h3 id="4-spectral-profile-analysis">4: Spectral Profile Analysis</h3> <p>Examining the spectral signature of a single pixel:</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Select a pixel</span>
+<span class="n">row_idx</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+<span class="n">col_idx</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span>
+
+<span class="c1">% Extract spectral profile</span>
+<span class="n">spectrum</span> <span class="o">=</span> <span class="nb">squeeze</span><span class="p">(</span><span class="n">datacube</span><span class="p">(</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">,</span> <span class="p">:));</span>
+
+<span class="c1">% Plot</span>
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">,</span> <span class="s1">'LineWidth'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'Wavelength (nm)'</span><span class="p">);</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Reflectance'</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Spectral Profile at Pixel (%d, %d)'</span><span class="p">,</span> <span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span><span class="p">));</span>
+<span class="nb">grid</span> <span class="n">on</span><span class="p">;</span>
+</code></pre></div></div> <p>This reveals the unique spectral “fingerprint” of the material at that location.</p> <h3 id="5-data-reshaping">5: Data Reshaping</h3> <p>Convert the 3D cube into a 2D matrix for SVD:</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Original: 145 × 145 × 220 (rows × cols × bands)</span>
+<span class="c1">% Reshape to: (145×145) × 220 = 21025 × 220</span>
+<span class="c1">% Each row is a pixel, each column is a wavelength band</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">datacube</span><span class="p">,</span> <span class="n">rows</span><span class="o">*</span><span class="n">cols</span><span class="p">,</span> <span class="n">bands</span><span class="p">);</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Original size: %d elements\n'</span><span class="p">,</span> <span class="n">rows</span><span class="o">*</span><span class="n">cols</span><span class="o">*</span><span class="n">bands</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Reshaped matrix: %d × %d\n'</span><span class="p">,</span> <span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
+</code></pre></div></div> <p><strong>Understanding the reshape:</strong></p> <ul> <li>Each <strong>row</strong> represents one pixel’s complete spectrum</li> <li>Each <strong>column</strong> represents one wavelength across all pixels</li> <li>We’ve “unfolded” the spatial dimensions into rows</li> </ul> <h3 id="6-applying-svd">6: Applying SVD</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Perform SVD</span>
+<span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="p">]</span> <span class="o">=</span> <span class="nb">svd</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">'econ'</span><span class="p">);</span>
+<span class="c1">% 'econ' produces economy-size decomposition: faster and uses less memory</span>
+
+<span class="c1">% Extract singular values</span>
+<span class="n">singular_values</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+
+<span class="c1">% Compute explained variance</span>
+<span class="n">explained_var</span> <span class="o">=</span> <span class="p">(</span><span class="n">singular_values</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span> <span class="p">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">singular_values</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">cumulative_var</span> <span class="o">=</span> <span class="nb">cumsum</span><span class="p">(</span><span class="n">explained_var</span><span class="p">);</span>
+
+<span class="c1">% Plot</span>
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">singular_values</span><span class="p">,</span> <span class="s1">'o-'</span><span class="p">,</span> <span class="s1">'LineWidth'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'Component Index'</span><span class="p">);</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Singular Value'</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s1">'Singular Values (Scree Plot)'</span><span class="p">);</span>
+<span class="nb">grid</span> <span class="n">on</span><span class="p">;</span>
+
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">cumulative_var</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">'LineWidth'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'Number of Components'</span><span class="p">);</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Cumulative Explained Variance (%)'</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s1">'Cumulative Variance Explained'</span><span class="p">);</span>
+<span class="nb">grid</span> <span class="n">on</span><span class="p">;</span>
+<span class="nb">yline</span><span class="p">(</span><span class="mi">99</span><span class="p">,</span> <span class="s1">'--r'</span><span class="p">,</span> <span class="s1">'99% Threshold'</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>Key observations:</strong></p> <ul> <li>Singular values drop rapidly (most information in first few components)</li> <li>Cumulative variance plateaus quickly (diminishing returns)</li> </ul> <h3 id="7selecting-reconstruction-rank">7:Selecting Reconstruction Rank</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Find minimum k for 99% variance</span>
+<span class="n">variance_threshold</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">;</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">cumulative_var</span> <span class="o">&gt;=</span> <span class="n">variance_threshold</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'first'</span><span class="p">);</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Components needed for %.1f%% variance: %d\n'</span><span class="p">,</span> <span class="k">...</span>
+        <span class="n">variance_threshold</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Variance captured: %.4f%%\n'</span><span class="p">,</span> <span class="n">cumulative_var</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">);</span>
+</code></pre></div></div> <h3 id="8-low-rank-reconstruction">8: Low-Rank Reconstruction</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Truncate to first k components</span>
+<span class="n">U_k</span> <span class="o">=</span> <span class="n">U</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">);</span>
+<span class="n">S_k</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">);</span>
+<span class="n">V_k</span> <span class="o">=</span> <span class="n">V</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">:</span><span class="n">k</span><span class="p">);</span>
+
+<span class="c1">% Reconstruct</span>
+<span class="n">X_reconstructed</span> <span class="o">=</span> <span class="n">U_k</span> <span class="o">*</span> <span class="n">S_k</span> <span class="o">*</span> <span class="n">V_k</span><span class="o">'</span><span class="p">;</span>
+
+<span class="c1">% Reshape back to 3D cube</span>
+<span class="n">datacube_reconstructed</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">X_reconstructed</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">bands</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>What we’ve done:</strong></p> <ul> <li>Kept only the first k columns of U and V</li> <li>Kept only the first k singular values from Σ</li> <li>Multiplied them to get an approximation of X</li> </ul> <h3 id="9-computing-dimensionality-reduction">9: Computing Dimensionality Reduction</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Original storage</span>
+<span class="n">original_elements</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">bands</span><span class="p">;</span>
+
+<span class="c1">% Reduced storage: U_k + S_k + V_k</span>
+<span class="n">reduced_elements</span> <span class="o">=</span> <span class="nb">numel</span><span class="p">(</span><span class="n">U_k</span><span class="p">)</span> <span class="o">+</span> <span class="nb">numel</span><span class="p">(</span><span class="n">S_k</span><span class="p">)</span> <span class="o">+</span> <span class="nb">numel</span><span class="p">(</span><span class="n">V_k</span><span class="p">);</span>
+<span class="c1">% Or equivalently: (rows*cols)*k + k*k + bands*k</span>
+
+<span class="c1">% Reduction percentage</span>
+<span class="n">reduction</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">reduced_elements</span><span class="p">/</span><span class="n">original_elements</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Original elements: %d\n'</span><span class="p">,</span> <span class="n">original_elements</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Reduced elements: %d\n'</span><span class="p">,</span> <span class="n">reduced_elements</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Dimensionality reduction: %.2f%%\n'</span><span class="p">,</span> <span class="n">reduction</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>Understanding the storage:</strong></p> <ul> <li>Original: Store entire 145×145×220 cube</li> <li>Reduced: Store U_k (21025×k) + S_k (k×k) + V_k (220×k)</li> <li>Huge savings when k « min(rows×cols, bands)</li> </ul> <h3 id="10-error-analysis">10: Error Analysis</h3> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Compute Root Mean Squared Error</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">mean</span><span class="p">((</span><span class="n">X</span><span class="p">(:)</span> <span class="o">-</span> <span class="n">X_reconstructed</span><span class="p">(:))</span><span class="o">.^</span><span class="mi">2</span><span class="p">));</span>
+
+<span class="c1">% Relative error</span>
+<span class="n">relative_error</span> <span class="o">=</span> <span class="n">rmse</span> <span class="p">/</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">mean</span><span class="p">(</span><span class="n">X</span><span class="p">(:)</span><span class="o">.^</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'RMSE: %.6f\n'</span><span class="p">,</span> <span class="n">rmse</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Relative error: %.4f%%\n'</span><span class="p">,</span> <span class="n">relative_error</span><span class="p">);</span>
+
+<span class="c1">% Visualize reconstruction quality</span>
+<span class="nb">figure</span><span class="p">;</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="nb">imshow</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s1">'Original RGB'</span><span class="p">);</span>
+
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">rgb_reconstructed</span> <span class="o">=</span> <span class="nb">cat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">datacube_reconstructed</span><span class="p">(:,:,</span><span class="n">red_band</span><span class="p">),</span> <span class="k">...</span>
+                           <span class="n">datacube_reconstructed</span><span class="p">(:,:,</span><span class="n">green_band</span><span class="p">),</span> <span class="k">...</span>
+                           <span class="n">datacube_reconstructed</span><span class="p">(:,:,</span><span class="n">blue_band</span><span class="p">));</span>
+<span class="n">rgb_reconstructed</span> <span class="o">=</span> <span class="n">rgb_reconstructed</span> <span class="p">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">rgb_reconstructed</span><span class="p">(:));</span>
+<span class="nb">imshow</span><span class="p">(</span><span class="n">rgb_reconstructed</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Reconstructed RGB (k=%d)'</span><span class="p">,</span> <span class="n">k</span><span class="p">));</span>
+</code></pre></div></div> <hr> <h2 id="results-and-analysis">Results and Analysis</h2> <h3 id="image-loading-and-properties">Image Loading and Properties</h3> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/ADML/img1-480.webp 480w,/Wiredu2020/assets/img/ADML/img1-800.webp 800w,/Wiredu2020/assets/img/ADML/img1-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/ADML/img1.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/ADML/img2-480.webp 480w,/Wiredu2020/assets/img/ADML/img2-800.webp 800w,/Wiredu2020/assets/img/ADML/img2-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/ADML/img2.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Left: RGB visualization using bands at approximately 650nm (red), 550nm (green), and 450nm (blue). Right: False-color composite using NIR-Red-Green bands with contrast stretching. Healthy vegetation appears bright red due to strong near-infrared reflection. </div> <p><strong>Dataset Properties:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hypercube Dimensions: 145 × 145 × 220
+Total Elements: 4,625,500
+Wavelength Range: 220 bands spanning visible to near-infrared
+Storage Size: ~37 MB (double precision)
+</code></pre></div></div> <hr> <h3 id="spectral-signature-analysis">Spectral Signature Analysis</h3> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/ADML/img3-480.webp 480w,/Wiredu2020/assets/img/ADML/img3-800.webp 800w,/Wiredu2020/assets/img/ADML/img3-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/ADML/img3.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Spectral profile of pixel at position (60, 70). The significant peak around wavelength index 50 (approximately 650-700nm) indicates strong red/near-infrared reflection, characteristic of vegetation. </div> <p><strong>Interpretation:</strong></p> <ul> <li>The spectral profile shows the unique “fingerprint” of this pixel</li> <li>High reflectance in red edge and NIR suggests healthy vegetation</li> <li>Lower reflectance in blue/green (photosynthesis absorption)</li> <li>This demonstrates why hyperspectral imaging is powerful for classification</li> </ul> <hr> <h3 id="data-transformation">Data Transformation</h3> <p><strong>Original 3D Structure:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spatial dimensions: 145 × 145 pixels
+Spectral dimension: 220 bands
+Total: 4,625,500 elements
+</code></pre></div></div> <p><strong>Reshaped 2D Matrix:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rows (pixels): 21,025
+Columns (bands): 220
+Interpretation: Each row is a spectrum, each column is a spatial map
+</code></pre></div></div> <p>This transformation is key for applying SVD, which operates on 2D matrices.</p> <hr> <h3 id="svd-decomposition-results">SVD Decomposition Results</h3> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/ADML/img5-480.webp 480w,/Wiredu2020/assets/img/ADML/img5-800.webp 800w,/Wiredu2020/assets/img/ADML/img5-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/ADML/img5.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> Cumulative explained variance vs. number of components. The rapid initial rise indicates that a small number of components capture most of the data's information content. </div> <p><strong>Key Findings:</strong></p> <table> <thead> <tr> <th>Metric</th> <th>Value</th> </tr> </thead> <tbody> <tr> <td>Components for 99% variance</td> <td><strong>k = 2</strong></td> </tr> <tr> <td>Variance explained by first component</td> <td>~85%</td> </tr> <tr> <td>Variance explained by first two components</td> <td>99%</td> </tr> <tr> <td>Remaining 218 components</td> <td>1%</td> </tr> </tbody> </table> <p>This result is remarkable: <strong>99% of the information in 220 bands is captured by just 2 components!</strong></p> <p><strong>Why so few components?</strong></p> <ol> <li> <strong>High spectral correlation</strong>: Adjacent wavelengths are very similar</li> <li> <strong>Smooth spectral signatures</strong>: Most materials have smoothly varying spectra</li> <li> <strong>Limited material diversity</strong>: Only a few land cover types in the scene</li> <li> <strong>Noise</strong>: Some bands contain primarily noise (low signal)</li> </ol> <hr> <h3 id="dimensionality-reduction-analysis">Dimensionality Reduction Analysis</h3> <p><strong>Storage Requirements:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original storage:
+- Full datacube: 4,625,500 elements
+
+Reduced storage (k=2):
+- U_k: 21,025 × 2 = 42,050 elements
+- S_k: 2 × 2 = 4 elements
+- V_k: 220 × 2 = 440 elements
+- Total: 42,494 elements
+
+Reduction: 96.35%
+Compression ratio: 108.9:1
+</code></pre></div></div> <p><strong>Practical implications:</strong></p> <ul> <li> <strong>Storage</strong>: Reduced from ~37 MB to ~0.34 MB</li> <li> <strong>Transmission</strong>: 100× faster data transfer</li> <li> <strong>Processing</strong>: Much faster computations on compressed data</li> <li> <strong>Memory</strong>: Can handle larger datasets in limited RAM</li> </ul> <hr> <h3 id="reconstructed-image-quality">Reconstructed Image Quality</h3> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/ADML/img4-480.webp 480w,/Wiredu2020/assets/img/ADML/img4-800.webp 800w,/Wiredu2020/assets/img/ADML/img4-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/ADML/img4.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <div class="caption"> RGB visualization of reconstructed hyperspectral cube using only 2 SVD components. Despite 96% reduction in dimensionality, the image retains all major structural features and most spectral information. </div> <p><strong>Reconstruction Error:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RMSE: ~0.0023 (very small!)
+Relative error: &lt;1%
+Visual quality: Excellent
+</code></pre></div></div> <p><strong>What’s preserved:</strong></p> <ul> <li>Spatial structures (fields, roads, buildings)</li> <li>Spectral characteristics (material signatures)</li> <li>Statistical properties (means, variances)</li> </ul> <p><strong>What’s lost:</strong></p> <ul> <li>Fine spectral details</li> <li>High-frequency noise</li> <li>Minor spectral variations</li> </ul> <h2 id="mathematical-properties-of-svd">Mathematical Properties of SVD</h2> <h3 id="optimality-of-truncated-svd">Optimality of Truncated SVD</h3> <p>The rank-k approximation $X_k = U_k \Sigma_k V_k^T$ is optimal in the sense that it minimizes:</p> \[\|\mathbf{X} - \mathbf{X}_k\|_F = \min_{\text{rank}(\mathbf{Y})=k} \|\mathbf{X} - \mathbf{Y}\|_F\] <table> <tbody> <tr> <td>where $</td> <td>.</td> <td>_F$ is the Frobenius norm (sum of squared errors).</td> </tr> </tbody> </table> <p><strong>What this means:</strong> Among all possible rank-k matrices, truncated SVD gives the one closest to the original data. No other method can beat it!</p> <h3 id="eckart-young-mirsky-theorem">Eckart-Young-Mirsky Theorem</h3> <p>The reconstruction error is exactly:</p> \[\|\mathbf{X} - \mathbf{X}_k\|_F = \sqrt{\sum_{i=k+1}^{r} \sigma_i^2}\] <p>This tells us:</p> <ul> <li>Error depends only on discarded singular values</li> <li>If $\sigma_{k+1}, \ldots$ are small, error is small</li> <li>We can predict error before reconstruction!</li> </ul> <p><strong>Tip:</strong> Use economy SVD (<code class="language-plaintext highlighter-rouge">svd(X,'econ')</code> in MATLAB) for large datasets to save memory and time.</p> <hr> <h2 id="practical-considerations">Practical Considerations</h2> <h3 id="when-svd-works-well">When SVD Works Well</h3> <p>SVD is most effective when:</p> <ol> <li> <strong>High redundancy</strong>: Correlated features (like spectral bands)</li> <li> <strong>Low intrinsic dimensionality</strong>: Data lies on a low-dimensional manifold</li> <li> <strong>Smooth variations</strong>: Gradual changes rather than sharp transitions</li> <li> <strong>Good signal-to-noise ratio</strong>: Noise doesn’t dominate signal</li> </ol> <p>Hyperspectral images typically satisfy all these conditions!</p> <h3 id="when-to-be-careful">When to Be Careful</h3> <p>SVD may struggle with:</p> <ol> <li> <strong>Sparse data</strong>: Lots of zeros (use specialized sparse methods)</li> <li> <strong>Non-linear structures</strong>: Curved manifolds (consider kernel PCA)</li> <li> <strong>Discrete data</strong>: Categorical variables (inappropriate for SVD)</li> <li> <strong>Very large matrices</strong>: Computational cost becomes prohibitive</li> </ol> <h3 id="alternative-methods">Alternative Methods</h3> <p>For comparison, other dimensionality reduction techniques include:</p> <p><strong>Linear methods:</strong></p> <ul> <li> <strong>PCA</strong>: Essentially equivalent to SVD for centered data</li> <li> <strong>NMF</strong> (Non-negative Matrix Factorization): Enforces non-negativity</li> <li> <strong>ICA</strong> (Independent Component Analysis): Finds statistically independent components</li> <li> <strong>LDA</strong> (Linear Discriminant Analysis): Supervised, maximizes class separation</li> </ul> <p><strong>Nonlinear methods:</strong></p> <ul> <li> <strong>t-SNE</strong>: Great for visualization, poor for reconstruction</li> <li> <strong>UMAP</strong>: Similar to t-SNE but faster</li> <li> <strong>Autoencoders</strong>: Neural network-based compression</li> <li> <strong>Kernel PCA</strong>: Nonlinear variant of PCA</li> </ul> <p>For hyperspectral imaging, <strong>SVD/PCA remains the gold standard</strong> due to simplicity, interpretability, and proven effectiveness.</p> <hr> <h2 id="advanced-topics-and-extensions">Advanced Topics and Extensions</h2> <h3 id="incremental-svd">Incremental SVD</h3> <p>For streaming or large datasets that don’t fit in memory:</p> <ul> <li>Process data in batches</li> <li>Update SVD incrementally</li> <li>Maintain approximate low-rank representation</li> </ul> <h3 id="randomized-svd">Randomized SVD</h3> <p>For very large matrices:</p> <ul> <li>Use random projections for approximation</li> <li>Much faster than full SVD (O(mnk) instead of O(mn²))</li> <li>Controlled accuracy trade-off</li> </ul> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Randomized SVD (requires additional toolbox)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">[</span><span class="n">U_approx</span><span class="p">,</span> <span class="n">S_approx</span><span class="p">,</span> <span class="n">V_approx</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsvd</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+</code></pre></div></div> <h3 id="tensor-decomposition">Tensor Decomposition</h3> <p>Instead of reshaping to 2D, work directly with 3D tensor:</p> <ul> <li> <strong>Tucker decomposition</strong>: Higher-order SVD</li> <li> <strong>CP decomposition</strong>: CANDECOMP/PARAFAC</li> <li>Preserves multi-way structure</li> </ul> <h3 id="supervised-dimensionality-reduction">Supervised Dimensionality Reduction</h3> <p>If you have class labels (e.g., crop types):</p> <ul> <li><strong>Discriminant Analysis Feature Extraction (DAFE)</strong></li> <li><strong>Maximum Noise Fraction (MNF)</strong></li> <li>Optimize for classification performance</li> </ul> <h3 id="practical-applications">Practical Applications</h3> <p>This dimensionality reduction enables:</p> <p><strong>1. Classification</strong>: Train classifiers on compressed data</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Use reduced representation for classification</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">U_k</span> <span class="o">*</span> <span class="n">S_k</span><span class="p">;</span>  <span class="c1">% 21025×2 instead of 21025×220</span>
+<span class="c1">% Train SVM, Random Forest, etc. on these features</span>
+</code></pre></div></div> <p><strong>2. Anomaly Detection</strong>: Identify pixels that don’t fit the low-rank model</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Reconstruction error per pixel</span>
+<span class="n">pixel_errors</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_reconstructed</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+<span class="n">anomaly_map</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">pixel_errors</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>3. Compression</strong>: Store/transmit compact representation</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Save compressed version</span>
+<span class="nb">save</span><span class="p">(</span><span class="s1">'indian_pines_compressed.mat'</span><span class="p">,</span> <span class="s1">'U_k'</span><span class="p">,</span> <span class="s1">'S_k'</span><span class="p">,</span> <span class="s1">'V_k'</span><span class="p">,</span> <span class="k">...</span>
+     <span class="s1">'rows'</span><span class="p">,</span> <span class="s1">'cols'</span><span class="p">,</span> <span class="s1">'bands'</span><span class="p">,</span> <span class="s1">'wavelengths'</span><span class="p">);</span>
+</code></pre></div></div> <p><strong>4. Visualization</strong>: Project to 2D/3D for human inspection</p> <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% 2D scatter plot using first 2 components</span>
+<span class="nb">scatter</span><span class="p">(</span><span class="n">U</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span> <span class="n">U</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="s1">'filled'</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'Component 1'</span><span class="p">);</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Component 2'</span><span class="p">);</span>
+</code></pre></div></div> <hr> <h2 id="limitations-and-challenges">Limitations and Challenges</h2> <h3 id="1-linear-assumption">1. Linear Assumption</h3> <p>SVD assumes linear relationships. It may miss:</p> <ul> <li>Nonlinear spectral mixing (intimate mixtures)</li> <li>Complex atmospheric effects</li> <li>Nonlinear sensor responses</li> </ul> <p><strong>Solution</strong>: Consider kernel PCA or manifold learning for nonlinear patterns.</p> <h3 id="2-global-analysis">2. Global Analysis</h3> <p>SVD finds global patterns but may miss:</p> <ul> <li>Localized anomalies</li> <li>Rare classes with unique spectra</li> <li>Spatial discontinuities</li> </ul> <p><strong>Solution</strong>: Apply SVD locally (tile-based) or use sparse methods.</p> <h3 id="3-noise-sensitivity">3. Noise Sensitivity</h3> <p>While SVD can denoise by removing small singular values, it can also:</p> <ul> <li>Spread systematic noise across components</li> <li>Fail to separate signal from structured noise</li> </ul> <p><strong>Solution</strong>: Preprocess with noise-adjusted methods (MNF, Minimum Noise Fraction).</p> <h3 id="4-interpretability">4. Interpretability</h3> <p>While mathematically optimal, SVD components are abstract:</p> <ul> <li>Not physically meaningful</li> <li>Mixed spectral-spatial patterns</li> <li>Difficult to relate to domain knowledge</li> </ul> <p><strong>Solution</strong>: Compare with domain-specific features (vegetation indices, mineral indices).</p> <hr> <h2 id="future-extensions-and-research-directions">Future Extensions and Research Directions</h2> <h3 id="1-temporal-analysis">1. Temporal Analysis</h3> <p>For time-series hyperspectral data:</p> <ul> <li>Apply SVD to spatiotemporal cube</li> <li>Track component changes over time</li> <li>Detect phenological changes</li> </ul> <h3 id="2-fusion-with-other-data">2. Fusion with Other Data</h3> <p>Combine hyperspectral with:</p> <ul> <li>LiDAR (elevation data)</li> <li>SAR (radar data)</li> <li>Multispectral (higher spatial resolution)</li> </ul> <p>Use joint SVD or coupled matrix factorization.</p> <h3 id="3-deep-learning-integration">3. Deep Learning Integration</h3> <ul> <li>Use SVD for pre-training autoencoders</li> <li>Initialize neural network layers with SVD components</li> <li>Combine SVD with CNN for hybrid models</li> </ul> <h3 id="4-real-time-processing">4. Real-Time Processing</h3> <ul> <li>Implement online/incremental SVD</li> <li>Parallel processing on GPU</li> <li>Edge computing for drone/satellite platforms</li> </ul> <h3 id="5-uncertainty-quantification">5. Uncertainty Quantification</h3> <ul> <li>Bootstrap SVD for confidence intervals</li> <li>Bayesian approaches to SVD</li> <li>Propagate uncertainty through reconstruction</li> </ul> <hr> <h2 id="conclusions">Conclusions</h2> <p>This comprehensive study demonstrates the power and elegance of Singular Value Decomposition for hyperspectral image analysis. Key takeaways:</p> <h3 id="theoretical-insights">Theoretical Insights</h3> <ul> <li>SVD provides the mathematically optimal low-rank approximation</li> <li>Singular values reveal the intrinsic dimensionality of data</li> <li>The method is interpretable, stable, and well-understood</li> </ul> <h3 id="practical-results">Practical Results</h3> <ul> <li>Achieved 96.35% dimensionality reduction while retaining 99% of variance</li> <li>Only 2 components needed for the Indian Pines dataset</li> <li>Reconstruction error &lt;1%, visually imperceptible</li> <li>Compression ratio of 108:1</li> </ul> <h3 id="applications">Applications</h3> <ul> <li>Efficient storage and transmission</li> <li>Preprocessing for machine learning</li> <li>Data visualization and exploration</li> <li>Noise reduction and quality enhancement</li> </ul> <h3 id="best-practices">Best Practices</h3> <ol> <li>Always visualize singular value decay</li> <li>Use cumulative variance to select rank</li> <li>Validate reconstruction quality visually and numerically</li> <li>Consider domain knowledge when interpreting components</li> <li>Compare with alternative methods for your specific application</li> </ol> <p>SVD remains a fundamental tool in the hyperspectral imaging pipeline, balancing mathematical rigor with computational efficiency and practical utility.</p> <hr> <h2 id="references">References</h2> <ol> <li> <p><strong>Jolliffe, I. T., &amp; Cadima, J. (2016)</strong><br> “Principal component analysis: a review and recent developments”<br> <em>Philosophical Transactions of the Royal Society A</em>, 374(2065), 20150202.</p> </li> <li> <p><strong>Green, A. A., et al. (1988)</strong><br> “A transformation for ordering multispectral data in terms of image quality with implications for noise removal”<br> <em>IEEE Transactions on Geoscience and Remote Sensing</em>, 26(1), 65-74. [Introduces Minimum Noise Fraction (MNF)]</p> </li> <li> <p><strong>Trefethen, L. N., &amp; Bau III, D. (1997)</strong><br> “Numerical Linear Algebra”<br> <em>SIAM</em>, Philadelphia. [Comprehensive treatment of SVD and numerical methods]</p> </li> <li> <p><strong>Golub, G. H., &amp; Van Loan, C. F. (2013)</strong><br> “Matrix Computations” (4th ed.)<br> <em>Johns Hopkins University Press</em>. [Standard reference for SVD algorithms]</p> </li> <li> <p><strong>Landgrebe, D. (2003)</strong><br> “Signal Theory Methods in Multispectral Remote Sensing”<br> <em>Wiley-Interscience</em>. [Hyperspectral image analysis fundamentals]</p> </li> </ol> <hr> <h2 id="code-and-data-availability">Code and Data Availability</h2> <p><strong>Dataset</strong>: Indian Pines hyperspectral image</p> <ul> <li>Source: Purdue University</li> <li>Format: MATLAB <code class="language-plaintext highlighter-rouge">.mat</code> file</li> <li>Size: 145×145×220 (4.6M elements)</li> </ul> <p><strong>Code</strong>: Complete MATLAB implementation available at [GitHub repository link]</p> <p><strong>Dependencies</strong>:</p> <ul> <li>MATLAB R2018b or later</li> <li>Image Processing Toolbox (for visualization functions)</li> <li>Statistics and Machine Learning Toolbox (optional, for additional analysis)</li> </ul> <hr> <p><em>For questions, suggestions, or collaborations, please open an issue on GitHub or contact via email.</em></p> <p><strong>Last updated</strong>: January 2025</p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/" target="_blank" rel="noopener noreferrer">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2" target="_blank" rel="noopener noreferrer">Displaying External Posts on Your al-folio Blog</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svm/">Nonlinear Support Vector Machine (SVM) with Polynomial Kernel</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/logistic_regression/">Logistic Regression for Ultrasonic Flow Meter Health Classification</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/optimizationAlgorithm/">On the optimization algorithms and learning rate</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/graphNN/">Graphs and Graph Neural Nets</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/knn/">K-Nearest Neighbor (KNN) -- How your closest connections define you!</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Bright Wiredu Nuakoh. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/Wiredu2020/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/Wiredu2020//assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/Wiredu2020/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/Wiredu2020/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/Wiredu2020/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/Wiredu2020/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/Wiredu2020/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020//assets/al_img_tools/js/zoom.js"></script> <script defer src="/Wiredu2020/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/Wiredu2020//assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/Wiredu2020//assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/Wiredu2020/";
+    },
+  },{id: "nav-blogs",
+          title: "blogs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications and theses.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A growing collection of your cool projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/projects/";
+          },
+        },{id: "nav-repos",
+          title: "repos",
+          description: "Relevant Repositories.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/cv/";
+          },
+        },{id: "nav-teaching-experience",
+          title: "teaching experience",
+          description: "Tutor Fellow - AIMS Rwanda | Teaching Assistant - Mathematic Department, University of Ghana",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/teaching/";
+          },
+        },{id: "post-nonlinear-support-vector-machine-svm-with-polynomial-kernel",
+        
+          title: "Nonlinear Support Vector Machine (SVM) with Polynomial Kernel",
+        
+        description: "Nonlinear support vector machine from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svm/";
+          
+        },
+      },{id: "post-singular-value-decomposition-for-hyperspectral-image-dimensionality-reduction",
+        
+          title: "Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction",
+        
+        description: "Understanding SVD theory and applying it to hyperspectral imaging - A comprehensive guide",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svd_blog_extended/";
+          
+        },
+      },{id: "post-logistic-regression-for-ultrasonic-flow-meter-health-classification",
+        
+          title: "Logistic Regression for Ultrasonic Flow Meter Health Classification",
+        
+        description: "Binary classification of ultrasonic flow meter health using logistic regression and numerical optimization",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/logistic_regression/";
+          
+        },
+      },{id: "post-on-the-optimization-algorithms-and-learning-rate",
+        
+          title: "On the optimization algorithms and learning rate",
+        
+        description: "Gradient descent (GD), Stochastic GD, Adam optimizer",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/optimizationAlgorithm/";
+          
+        },
+      },{id: "post-graphs-and-graph-neural-nets",
+        
+          title: "Graphs and Graph Neural Nets",
+        
+        description: "Graphs, Adjacency Matrix, Graph Neural Nets",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/graphNN/";
+          
+        },
+      },{id: "post-k-nearest-neighbor-knn-how-your-closest-connections-define-you",
+        
+          title: "K-Nearest Neighbor (KNN) -- How your closest connections define you!",
+        
+        description: "KNN algorithm from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/knn/";
+          
+        },
+      },{id: "post-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
+        
+          title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/", "_blank");
+          
+        },
+      },{id: "post-displaying-external-posts-on-your-al-folio-blog",
+        
+          title: 'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/Wiredu2020/books/the_godfather/";
+            },},{id: "news-nothing-exciting-to-share-for-now",
+          title: 'Nothing exciting to share for now.',
+          description: "",
+          section: "News",},{id: "projects-3d-computer-vision-amp-robotics",
+          title: '3D Computer Vision &amp;amp; Robotics',
+          description: "Robotic Workspace Calibration and Object Localization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/1_project/";
+            },},{id: "projects-3d-reconstruction-for-wildlife-re-identification",
+          title: '3D Reconstruction for Wildlife Re-identification',
+          description: "Deep Learning for Animal Identification from 2D Images",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/2_project/";
+            },},{id: "projects-super-resolution-for-satellite-imagery",
+          title: 'Super-Resolution for Satellite Imagery',
+          description: "Deep Learning Methods for Enhanced Satellite Image Resolution",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/3_project/";
+            },},{id: "projects-ai-follow-up-agent",
+          title: 'AI Follow-up Agent',
+          description: "Autonomous LLM-based Task Management System",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/4_project/";
+            },},{id: "projects-intelligent-chatbot-system",
+          title: 'Intelligent Chatbot System',
+          description: "End-to-End Conversational AI Application",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/5_project/";
+            },},{id: "projects-traffic-flow-analysis-system",
+          title: 'Traffic Flow Analysis System',
+          description: "Time-Series Analysis of Urban Traffic Patterns",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/6_project/";
+            },},{id: "projects-solar-system-simulation",
+          title: 'Solar System Simulation',
+          description: "Physics-based N-Body System Visualization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/7_project/";
+            },},{id: "projects-full-stack-web-applications",
+          title: 'Full-Stack Web Applications',
+          description: "End-to-End Web Development with Django and Modern Frontend",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/8_project/";
+            },},{id: "projects-machine-learning-algorithms-implementation",
+          title: 'Machine Learning Algorithms Implementation',
+          description: "From-Scratch Implementations of Core ML Algorithms",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/Wiredu2020/assets/pdf/CV.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%69%67%68%74.%77%69%72%65%64%75@%61%69%6D%73.%61%63.%72%77", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0001-2345-3817", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Wiredu2020", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/bright-wiredu-nuakoh-b24b02214", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=XplLiE4AAAAJ&hl", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/Wiredu2020//assets/al_search/js/shortcut-key.js"></script> </body> </html>

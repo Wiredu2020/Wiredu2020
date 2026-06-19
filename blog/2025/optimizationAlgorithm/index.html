@@ -1,0 +1,288 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> On the optimization algorithms and learning rate | Bright Wiredu </title> <meta name="author" content="Bright Wiredu Nuakoh"> <meta name="description" content="Gradient descent (GD), Stochastic GD, Adam optimizer"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/Wiredu2020/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/Wiredu2020/assets/img/favicon.ico?v=113bf03c0ecd43b1794a60b109bf8ab8"> <link rel="stylesheet" href="/Wiredu2020/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://wiredu2020.github.io/Wiredu2020/blog/2025/optimizationAlgorithm/"> <script src="/Wiredu2020/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/Wiredu2020//"> Bright Wiredu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/Wiredu2020/blog/">blogs </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/repositories/">repos </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/teaching/">teaching experience </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">On the optimization algorithms and learning rate</h1> <p class="post-meta"> Created on January 05, 2025 </p> <p class="post-tags"> <a href="/Wiredu2020/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/Wiredu2020/blog/tag/formatting"> <i class="fa-solid fa-hashtag fa-sm"></i> formatting</a>   <a href="/Wiredu2020/blog/tag/videos"> <i class="fa-solid fa-hashtag fa-sm"></i> videos</a>   ·   <a href="/Wiredu2020/blog/category/sample-posts"> <i class="fa-solid fa-tag fa-sm"></i> sample-posts</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="introduction">Introduction</h2> <p>Optimization lies at the heart of machine learning. Nearly every learning problem can be framed as the task of minimizing (or maximizing) an objective function that quantifies error, loss, or energy. Whether we are fitting a linear model or training a deep neural network with millions of parameters, the learning process reduces to an optimization problem.</p> <p>This article introduces the fundamental ideas behind optimization in machine learning and gradually builds intuition for some of the most widely used algorithms: <strong>Gradient Descent (GD)</strong>, <strong>Stochastic Gradient Descent (SGD)</strong>, and <strong>Adam</strong>.</p> <hr> <h2 id="optimization-as-a-minimization-problem">Optimization as a Minimization Problem</h2> <p>In supervised learning, we are given a dataset $\mathcal{D} = {(x_i, y_i)}_{i=1}^N$and a model parameterized by $\theta$. Learning consists of minimizing a loss function:</p> \[\theta^* = \arg\min_{\theta} \mathcal{L}(\theta), \quad \text{where} \quad \mathcal{L}(\theta) = \frac{1}{N} \sum_{i=1}^{N} \ell\big(f(x_i; \theta), y_i\big).\] <p>The loss surface can be convex or non-convex, smooth or highly irregular, low- or high-dimensional.</p> <p>Optimization algorithms define <em>how</em> we move on this surface to reach a good solution.</p> <hr> <h2 id="gradient-descent-gd">Gradient Descent (GD)</h2> <p>Gradient Descent is the most fundamental first-order optimization method. It iteratively updates parameters in the direction of the negative gradient of the loss function:</p> \[\theta_{t+1} = \theta_t - \eta \nabla_{\theta}\mathcal{L}(\theta_t)\] <p>where $\nabla_{\theta}\mathcal{L}$ is the gradient and $\eta &gt; 0$ is the learning rate.</p> <h2 id="example-of-its-convergence">Example of its convergence</h2> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/Wiredu2020/assets/video/gradient_descent_convergence.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls=""></video> </figure> </div> </div> <h3 id="intuition">Intuition</h3> <p>The gradient points in the direction of steepest ascent. Moving in the opposite direction ensures we descend toward a minimum. However, the choice of learning rate is critical.</p> <p>The animations here illustrate this clearly:</p> <ul> <li> <strong>Small learning rate</strong>: stable but slow convergence</li> <li> <strong>Large learning rate</strong>: faster movement but risk of overshooting or divergence</li> </ul> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/Wiredu2020/assets/video/small_lr.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls=""></video> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/Wiredu2020/assets/video/large_lr.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" controls=""></video> </figure> </div> </div> <h3 id="limitations">Limitations</h3> <ul> <li>Requires computing gradients over the <em>entire dataset</em> </li> <li>Slow for large-scale problems</li> <li>Sensitive to learning rate selection</li> </ul> <hr> <h2 id="stochastic-gradient-descent-sgd">Stochastic Gradient Descent (SGD)</h2> <p>To address scalability, <strong>Stochastic Gradient Descent</strong> approximates the full gradient using a single sample or a mini-batch:</p> \[\theta_{t+1} = \theta_t - \eta \nabla_{\theta}\ell(f(x_i; \theta_t), y_i)\] <h3 id="why-sgd-works">Why SGD Works</h3> <p>Although SGD introduces noise into the optimization process, this randomness often helps:</p> <ul> <li>escape shallow local minima</li> <li>improve generalization</li> <li>speed up training dramatically</li> </ul> <h3 id="trade-offs">Trade-offs</h3> <ul> <li>Faster per-iteration updates</li> <li>Noisy convergence</li> <li>Requires careful tuning of learning rate schedules</li> </ul> <hr> <h2 id="momentum-based-methods">Momentum-Based Methods</h2> <p>Pure SGD may oscillate heavily, especially in ravines where curvature differs across dimensions. Momentum methods address this by accumulating past gradients:</p> <p>$v_t = \beta v_{t-1} + (1 - \beta)\nabla_{\theta}\mathcal{L}(\theta_t)$ $\theta_{t+1} = \theta_t - \eta v_t$</p> <p>Momentum smooths updates and accelerates convergence along consistent directions.</p> <hr> <h2 id="adam-optimizer">Adam Optimizer</h2> <p><strong>Adam (Adaptive Moment Estimation)</strong> combines:</p> <ul> <li>momentum (first moment)</li> <li>adaptive learning rates (second moment)</li> </ul> <p>It maintains running estimates of:</p> <ul> <li>mean of gradients</li> <li>uncentered variance of gradients</li> </ul> <p>Update rules:</p> <p>\(m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t\) \(v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2\)</p> <p>After bias correction:</p> \[\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}\] <h2 id="example-of-its-convergence-1">Example of its convergence</h2> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/Wiredu2020/assets/video/adam_convergence.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls=""></video> </figure> </div> </div> <h3 id="why-adam-is-popular">Why Adam is Popular</h3> <ul> <li>Minimal tuning</li> <li>Handles sparse gradients well</li> <li>Works robustly in deep learning</li> </ul> <p>However, Adam is not always optimal for generalization and may converge to worse minima than SGD in some settings.</p> <hr> <h2 id="choosing-the-right-optimizer">Choosing the Right Optimizer</h2> <p>There is no universally optimal optimizer. The choice depends on:</p> <ul> <li>dataset size</li> <li>model complexity</li> <li>smoothness of the loss</li> <li>generalization requirements</li> </ul> <p><strong>Rule of thumb</strong>:</p> <ul> <li>Start with <strong>Adam</strong> for fast prototyping</li> <li>Switch to <strong>SGD + momentum</strong> for better generalization when training stabilizes</li> </ul> <hr> <h2 id="final-remarks">Final Remarks</h2> <p>Optimization algorithms define the dynamics of learning. Understanding how and why they work is essential not only for training models efficiently, but also for diagnosing failure modes such as divergence, slow convergence, or poor generalization.</p> <p>From classical Gradient Descent to adaptive methods like Adam, optimization remains an active and evolving research area—especially in large-scale and multimodal learning systems.</p> <hr> <p><em>Code implementations and experiments related to these algorithms are available in the accompanying repository.</em></p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/" target="_blank" rel="noopener noreferrer">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2" target="_blank" rel="noopener noreferrer">Displaying External Posts on Your al-folio Blog</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svm/">Nonlinear Support Vector Machine (SVM) with Polynomial Kernel</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svd_blog_extended/">Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/logistic_regression/">Logistic Regression for Ultrasonic Flow Meter Health Classification</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/graphNN/">Graphs and Graph Neural Nets</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/knn/">K-Nearest Neighbor (KNN) -- How your closest connections define you!</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Bright Wiredu Nuakoh. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/Wiredu2020/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/Wiredu2020//assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/Wiredu2020/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/Wiredu2020/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/Wiredu2020/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/Wiredu2020/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/Wiredu2020/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020//assets/al_img_tools/js/zoom.js"></script> <script defer src="/Wiredu2020/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/Wiredu2020//assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/Wiredu2020//assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/Wiredu2020/";
+    },
+  },{id: "nav-blogs",
+          title: "blogs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications and theses.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A growing collection of your cool projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/projects/";
+          },
+        },{id: "nav-repos",
+          title: "repos",
+          description: "Relevant Repositories.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/cv/";
+          },
+        },{id: "nav-teaching-experience",
+          title: "teaching experience",
+          description: "Tutor Fellow - AIMS Rwanda | Teaching Assistant - Mathematic Department, University of Ghana",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/teaching/";
+          },
+        },{id: "post-nonlinear-support-vector-machine-svm-with-polynomial-kernel",
+        
+          title: "Nonlinear Support Vector Machine (SVM) with Polynomial Kernel",
+        
+        description: "Nonlinear support vector machine from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svm/";
+          
+        },
+      },{id: "post-singular-value-decomposition-for-hyperspectral-image-dimensionality-reduction",
+        
+          title: "Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction",
+        
+        description: "Understanding SVD theory and applying it to hyperspectral imaging - A comprehensive guide",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svd_blog_extended/";
+          
+        },
+      },{id: "post-logistic-regression-for-ultrasonic-flow-meter-health-classification",
+        
+          title: "Logistic Regression for Ultrasonic Flow Meter Health Classification",
+        
+        description: "Binary classification of ultrasonic flow meter health using logistic regression and numerical optimization",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/logistic_regression/";
+          
+        },
+      },{id: "post-on-the-optimization-algorithms-and-learning-rate",
+        
+          title: "On the optimization algorithms and learning rate",
+        
+        description: "Gradient descent (GD), Stochastic GD, Adam optimizer",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/optimizationAlgorithm/";
+          
+        },
+      },{id: "post-graphs-and-graph-neural-nets",
+        
+          title: "Graphs and Graph Neural Nets",
+        
+        description: "Graphs, Adjacency Matrix, Graph Neural Nets",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/graphNN/";
+          
+        },
+      },{id: "post-k-nearest-neighbor-knn-how-your-closest-connections-define-you",
+        
+          title: "K-Nearest Neighbor (KNN) -- How your closest connections define you!",
+        
+        description: "KNN algorithm from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/knn/";
+          
+        },
+      },{id: "post-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
+        
+          title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/", "_blank");
+          
+        },
+      },{id: "post-displaying-external-posts-on-your-al-folio-blog",
+        
+          title: 'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/Wiredu2020/books/the_godfather/";
+            },},{id: "news-nothing-exciting-to-share-for-now",
+          title: 'Nothing exciting to share for now.',
+          description: "",
+          section: "News",},{id: "projects-3d-computer-vision-amp-robotics",
+          title: '3D Computer Vision &amp;amp; Robotics',
+          description: "Robotic Workspace Calibration and Object Localization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/1_project/";
+            },},{id: "projects-3d-reconstruction-for-wildlife-re-identification",
+          title: '3D Reconstruction for Wildlife Re-identification',
+          description: "Deep Learning for Animal Identification from 2D Images",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/2_project/";
+            },},{id: "projects-super-resolution-for-satellite-imagery",
+          title: 'Super-Resolution for Satellite Imagery',
+          description: "Deep Learning Methods for Enhanced Satellite Image Resolution",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/3_project/";
+            },},{id: "projects-ai-follow-up-agent",
+          title: 'AI Follow-up Agent',
+          description: "Autonomous LLM-based Task Management System",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/4_project/";
+            },},{id: "projects-intelligent-chatbot-system",
+          title: 'Intelligent Chatbot System',
+          description: "End-to-End Conversational AI Application",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/5_project/";
+            },},{id: "projects-traffic-flow-analysis-system",
+          title: 'Traffic Flow Analysis System',
+          description: "Time-Series Analysis of Urban Traffic Patterns",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/6_project/";
+            },},{id: "projects-solar-system-simulation",
+          title: 'Solar System Simulation',
+          description: "Physics-based N-Body System Visualization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/7_project/";
+            },},{id: "projects-full-stack-web-applications",
+          title: 'Full-Stack Web Applications',
+          description: "End-to-End Web Development with Django and Modern Frontend",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/8_project/";
+            },},{id: "projects-machine-learning-algorithms-implementation",
+          title: 'Machine Learning Algorithms Implementation',
+          description: "From-Scratch Implementations of Core ML Algorithms",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/Wiredu2020/assets/pdf/CV.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%69%67%68%74.%77%69%72%65%64%75@%61%69%6D%73.%61%63.%72%77", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0001-2345-3817", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Wiredu2020", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/bright-wiredu-nuakoh-b24b02214", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=XplLiE4AAAAJ&hl", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/Wiredu2020//assets/al_search/js/shortcut-key.js"></script> </body> </html>

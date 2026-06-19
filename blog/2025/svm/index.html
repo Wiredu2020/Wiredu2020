@@ -1,0 +1,491 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Nonlinear Support Vector Machine (SVM) with Polynomial Kernel | Bright Wiredu </title> <meta name="author" content="Bright Wiredu Nuakoh"> <meta name="description" content="Nonlinear support vector machine from scratch"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/Wiredu2020/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/Wiredu2020/assets/img/favicon.ico?v=113bf03c0ecd43b1794a60b109bf8ab8"> <link rel="stylesheet" href="/Wiredu2020/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://wiredu2020.github.io/Wiredu2020/blog/2025/svm/"> <script src="/Wiredu2020/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/Wiredu2020//"> Bright Wiredu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/Wiredu2020/blog/">blogs </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/repositories/">repos </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/teaching/">teaching experience </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Nonlinear Support Vector Machine (SVM) with Polynomial Kernel</h1> <p class="post-meta"> Created on December 20, 2025 </p> <p class="post-tags"> <a href="/Wiredu2020/blog/2025"> <i class="fa-solid fa-calendar fa-sm"></i> 2025 </a>   ·   <a href="/Wiredu2020/blog/tag/formatting"> <i class="fa-solid fa-hashtag fa-sm"></i> formatting</a>   <a href="/Wiredu2020/blog/tag/images"> <i class="fa-solid fa-hashtag fa-sm"></i> images</a>   ·   <a href="/Wiredu2020/blog/category/sample-posts"> <i class="fa-solid fa-tag fa-sm"></i> sample-posts</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h2 id="introduction-to-support-vector-machines">Introduction to Support Vector Machines</h2> <p>Support Vector Machines (SVMs) are powerful supervised learning algorithms designed for classification and regression tasks. What makes SVMs special is their unique approach to finding decision boundaries. Instead of trying to fit a probabilistic model to the data, SVMs search for the <strong>optimal separating hyperplane</strong> that creates the largest possible margin between different classes.</p> <p>Think of it this way: if you’re drawing a line to separate two groups of points, you want that line to be as far away as possible from both groups. This “safety margin” helps the model generalize better to new, unseen data.</p> <hr> <h2 id="the-core-idea-maximum-margin-principle">The Core Idea: Maximum Margin Principle</h2> <p>The fundamental principle behind SVM is <strong>margin maximization</strong>. The margin is the perpendicular distance from the decision boundary (hyperplane) to the nearest data points from each class. These nearest points are called <strong>support vectors</strong> because they literally “support” or define the decision boundary.</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/svm_overall-480.webp 480w,/Wiredu2020/assets/img/svm_overall-800.webp 800w,/Wiredu2020/assets/img/svm_overall-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/svm_overall.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <h3 id="why-maximize-the-margin">Why Maximize the Margin?</h3> <p>A larger margin provides:</p> <ul> <li> <strong>Better generalization</strong>: The model is less sensitive to small variations in the data</li> <li> <strong>Robustness</strong>: New data points are less likely to be misclassified</li> <li> <strong>Geometric intuition</strong>: The decision is based on clear separation, not just probability</li> </ul> <h3 id="the-mathematical-formulation">The Mathematical Formulation</h3> <p>For a dataset with features <strong>$x$</strong> and binary labels <strong>$y$</strong> (where $y = +1$ or $y = -1$), we want to find a hyperplane defined by weights <strong>$w$</strong> and bias <strong>$b$</strong> such that:</p> \[\min_{\mathbf{w}, b} \; \frac{1}{2}\|\mathbf{w}\|^2 \quad \text{subject to} \quad y_i(\mathbf{w}^\top x_i + b) \ge 1\] <p><strong>Breaking this down:</strong></p> <ul> <li> <table> <tbody> <tr> <td>The term $\frac{1}{2}</td> <td>w</td> <td>^2$ measures the inverse of the margin (smaller <strong>w</strong> means larger margin)</td> </tr> </tbody> </table> </li> <li>The constraint $y_i(w^TX_i + b) \ge 1$ ensures all points are correctly classified with at least distance 1 from the boundary</li> <li>Only the support vectors (points closest to the boundary) affect the solution</li> </ul> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <video src="/Wiredu2020/assets/video/svm_vid.mp4" class="img-fluid rounded z-depth-1" width="auto" height="auto" autoplay="" controls=""></video> </figure> </div> </div> <div class="caption"> Illustration of the maximum margin principle. The optimal hyperplane is determined solely by the support vectors (the points touching the margin boundaries), while other points have no influence on the decision boundary. </div> <hr> <h2 id="handling-real-world-data-soft-margin-svm">Handling Real-World Data: Soft Margin SVM</h2> <p>In practice, data is rarely perfectly separable. Classes often overlap due to noise, outliers, or the inherent nature of the problem. This is where <strong>soft margin SVM</strong> comes in.</p> <h3 id="introducing-slack-variables">Introducing Slack Variables</h3> <p>Soft margin SVM introduces slack variables $(\xi_i)$ that allow some points to violate the margin constraint. The optimization problem becomes:</p> \[\min_{\mathbf{w}, b, \xi} \; \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^{m}\xi_i \quad \text{subject to} \quad y_i(\mathbf{w}^\top x_i + b) \ge 1 - \xi_i, \; \xi_i \ge 0\] <h3 id="the-regularization-parameter-c">The Regularization Parameter C</h3> <p>The parameter <strong>C</strong> controls the trade-off between margin maximization and classification errors:</p> <ul> <li> <strong>Large C</strong> (e.g., $C = 1000$): <ul> <li>Penalizes misclassifications heavily</li> <li>Results in narrower margins</li> <li>Lower bias, higher variance</li> <li>Risks overfitting</li> </ul> </li> <li> <strong>Small C</strong> (e.g., $C = 0.1$): <ul> <li>Allows more margin violations</li> <li>Results in wider margins</li> <li>Higher bias, lower variance</li> <li>Better generalization</li> </ul> </li> </ul> <p><strong>Practical tip</strong>: Start with $C = 1.0$ and tune using cross-validation.</p> <hr> <h2 id="the-kernel-trick-unlocking-nonlinear-classification">The Kernel Trick: Unlocking Nonlinear Classification</h2> <p>This is where SVM becomes truly powerful. Many real-world problems cannot be solved with a straight line (or hyperplane). The data might be arranged in circles, spirals, or other complex patterns.</p> <h3 id="what-is-the-kernel-trick">What is the Kernel Trick?</h3> <p>The kernel trick is a mathematical technique that allows us to:</p> <ol> <li>Implicitly map data to a higher-dimensional space</li> <li>Find a linear separator in that high-dimensional space</li> <li><strong>Never actually compute the high-dimensional coordinates</strong></li> </ol> <p>Instead of explicitly transforming each data point $\phi(x)$, we use a kernel function $K(x_1, x_2)$ that computes the inner product in the transformed space directly.</p> <h3 id="common-kernel-functions">Common Kernel Functions</h3> <h4 id="1-linear-kernel">1. Linear Kernel</h4> \[K(\mathbf{x}_1, \mathbf{x}_2) = \mathbf{x}_1^\top \mathbf{x}_2\] <ul> <li>Use case: Data is already linearly separable</li> <li>Fastest to compute</li> </ul> <h4 id="2-polynomial-kernel">2. Polynomial Kernel</h4> \[K(\mathbf{x}_1, \mathbf{x}_2) = (1 + \mathbf{x}_1^\top \mathbf{x}_2)^d\] <ul> <li>Parameter: degree <strong>d</strong> (typically 2-5)</li> <li>Use case: Data has polynomial decision boundaries</li> <li>Our implementation uses this kernel!</li> </ul> <h4 id="3-radial-basis-function-rbfgaussian-kernel">3. Radial Basis Function (RBF/Gaussian) Kernel</h4> \[K(\mathbf{x}_1, \mathbf{x}_2) = \exp\left(-\gamma \|\mathbf{x}_1 - \mathbf{x}_2\|^2\right)\] <ul> <li>Parameter: $\gamma$ (controls influence radius)</li> <li>Use case: Most versatile, works for many nonlinear patterns</li> <li>Default choice when in doubt</li> </ul> <h4 id="4-sigmoid-kernel">4. Sigmoid Kernel</h4> \[K(\mathbf{x}_1, \mathbf{x}_2) = \tanh(\alpha \mathbf{x}_1^\top \mathbf{x}_2 + c)\] <ul> <li>Use case: Similar to neural network activation</li> <li>Less commonly used</li> </ul> <h3 id="how-the-kernel-trick-works">How the Kernel Trick Works</h3> <p>Consider a simple example with polynomial kernel of degree 2:</p> <ul> <li>Original space: 2D points $(x_1, x_2)$</li> <li>Transformed space: 6D $(1, x_1, x_2, x_1^2, x_2^2, x_1x_2)$</li> <li>Direct computation: $O(d^2)$ operations</li> <li>Kernel computation: $O(d)$ operations</li> </ul> <p>The kernel computes the same result as the inner product in the transformed space, but much more efficiently!</p> <hr> <h2 id="when-to-use-svms">When to Use SVMs</h2> <h3 id="svms-excel-when">SVMs Excel When:</h3> <ol> <li> <strong>Small to medium-sized datasets</strong> (hundreds to thousands of samples) <ul> <li>Computational cost grows with dataset size</li> <li>Training time is $O(n^2)$ to $O(n^3)$</li> </ul> </li> <li> <strong>High-dimensional feature spaces</strong> (many features relative to samples) <ul> <li>SVMs are less prone to overfitting in high dimensions</li> <li>Effective even when features » samples</li> </ul> </li> <li> <strong>Clear margin separation exists</strong> <ul> <li>SVMs naturally find the best separating boundary</li> <li>Robust to outliers (with proper C tuning)</li> </ul> </li> <li> <strong>Interpretability matters</strong> <ul> <li>Decision boundary is defined by support vectors</li> <li>Can identify which samples are most important</li> </ul> </li> </ol> <h3 id="consider-alternatives-when">Consider Alternatives When:</h3> <ul> <li>Dataset is very large (&gt;100,000 samples) $\to$ Use logistic regression or neural networks</li> <li>Data is very noisy with no clear separation $\to$ Try ensemble methods</li> <li>You need probability estimates $\to$ Use logistic regression or calibrated classifiers</li> <li>Real-time prediction speed is critical $\to$ Simpler models may be faster</li> </ul> <hr> <h2 id="implementation-from-scratch">Implementation from Scratch</h2> <p>Now let’s implement a nonlinear SVM using Python! We’ll use the <strong>polynomial kernel</strong> and solve the optimization problem using quadratic programming.</p> <h3 id="step-1-the-polynomial-kernel-function">Step 1: The Polynomial Kernel Function</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># libraries
+</span><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="n">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+
+<span class="c1"># mathematical equation for polynomial kernel
+</span><span class="k">def</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nf">return </span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">.</span><span class="n">T</span><span class="p">))</span> <span class="o">**</span> <span class="n">degree</span>
+</code></pre></div></div> <p><strong>Why add the +1?</strong> The constant term ensures that the kernel includes lower-degree polynomial terms as well. For example, with degree=2, we get terms involving $x_1^2, x_2^2, x_1x_2, x_1, x_2$, and the constant.</p> <h3 id="step-2-training-the-nonlinear-svm">Step 2: Training the Nonlinear SVM</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">svm_nonlinear</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Train a nonlinear SVM with a polynomial kernel using Quadratic Programming.
+    </span><span class="sh">"""</span>
+
+    <span class="c1"># Convert labels from {1, 2} to {+1, -1} for mathematical convenience
+</span>    <span class="n">trainclass</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">trainclass</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">traindata</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1">#  Compute the Kernel Matrix:  K[i,j] represents the kernel similarity between sample i and sample j
+</span>    <span class="n">K</span> <span class="o">=</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">traindata</span><span class="p">)</span>
+
+    <span class="c1"># Set up the Quadratic Programming problem
+</span>    <span class="c1"># We're solving: min (1/2)α^T P α + q^T α  subject to: Gα ≤ h and Aα = b
+</span>    <span class="c1"># P matrix: (y_i * y_j) * K(x_i, x_j)
+</span>    <span class="n">P</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">outer</span><span class="p">(</span><span class="n">trainclass</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span><span class="p">)</span>
+
+    <span class="c1"># q vector: all -1s (from the dual formulation)
+</span>    <span class="n">q</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+
+    <span class="c1"># G and h: inequality constraints (α_i ≥ 0). We use -I and 0 to represent α_i ≥ 0
+</span>    <span class="n">G</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+
+    <span class="c1"># A and b: equality constraint (Σ α_i * y_i = 0)
+</span>    <span class="n">A</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">trainclass</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="sh">'</span><span class="s">d</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1">#  Solve the QP problem, we suppress solver output when option is False.
+</span>    <span class="n">solvers</span><span class="p">.</span><span class="n">options</span><span class="p">[</span><span class="sh">'</span><span class="s">show_progress</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="p">.</span><span class="nf">qp</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># Extract Lagrange multipliers
+</span>    <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ravel</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">])</span>
+
+    <span class="c1"># Identify support vectors: Support vectors have $\alpha &gt; 0$ (choose a small threshold for numerical stability)
+</span>    <span class="n">sv_idx</span> <span class="o">=</span> <span class="n">alphas</span> <span class="o">&gt;</span> <span class="mf">1e-5</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">[</span><span class="n">sv_idx</span><span class="p">]</span>
+    <span class="n">svs</span> <span class="o">=</span> <span class="n">traindata</span><span class="p">[</span><span class="n">sv_idx</span><span class="p">]</span>
+    <span class="n">sv_classes</span> <span class="o">=</span> <span class="n">trainclass</span><span class="p">[</span><span class="n">sv_idx</span><span class="p">]</span>
+
+    <span class="c1">#  Compute the bias term w0: we use the KKT conditions: for support vectors on the margin,
+</span>    <span class="c1"># y_i * (Σ α_j * y_j * K(x_i, x_j) + w0) = 1
+</span>    <span class="c1"># Therefore: w0 = y_i - Σ α_j * y_j * K(x_i, x_j)
+</span>    <span class="c1"># We average over all support vectors for numerical stability
+</span>    <span class="n">w0</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">([</span>
+        <span class="n">sv_classes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">alphas</span> <span class="o">*</span> <span class="n">sv_classes</span> <span class="o">*</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">svs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">svs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">svs</span><span class="p">))</span>
+    <span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span>
+</code></pre></div></div> <p><strong>Key concepts in the code:</strong></p> <ol> <li> <strong>Quadratic Programming</strong>: SVM training is formulated as a QP problem in the dual form</li> <li> <strong>Support Vectors</strong>: Only points with α &gt; 0 actually contribute to the decision boundary</li> <li> <strong>Kernel Matrix</strong>: All pairwise similarities are precomputed for efficient optimization</li> <li> <strong>Bias Computation</strong>: Averaged over support vectors for better numerical stability</li> </ol> <h3 id="step-3-making-predictions">Step 3: Making Predictions</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict_svm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Make predictions using the trained SVM.
+
+    inputs:
+
+    X : ndarray of shape (n_samples, n_features) / validationo set array
+    svs : ndarray - Support vectors from training
+    sv_classes : ndarray - Labels of support vectors
+    alphas : ndarray -  Lagrange multipliers
+    w0 : float -   Bias term
+
+    output:
+
+    predictions : ndarray - predicted class labels (+1 or -1)
+    decision_scores : ndarray - raw decision function values (distance from boundary)
+    </span><span class="sh">"""</span>
+    <span class="c1"># Compute kernel between test points and support vectors
+</span>    <span class="n">K</span> <span class="o">=</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">svs</span><span class="p">)</span>
+
+    <span class="c1"># Decision function: f(x) = Σ α_i * y_i * K(x, x_i) + w0
+</span>    <span class="n">decision_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">*</span> <span class="n">sv_classes</span><span class="p">)</span> <span class="o">+</span> <span class="n">w0</span>
+
+    <span class="c1"># Predictions: sign of decision function
+</span>    <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sign</span><span class="p">(</span><span class="n">decision_scores</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">decision_scores</span>
+</code></pre></div></div> <h3 id="step-4-visualizing-the-decision-boundary">Step 4: Visualizing the Decision Boundary</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">plot_decision_boundary</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Plot the decision boundary, margins, and support vectors.
+
+    This visualization helps understand:
+    - How the SVM separates the classes
+    - Which points are support vectors
+    - The shape of the nonlinear decision boundary
+    </span><span class="sh">"""</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># Plot the training data
+</span>    <span class="c1"># Class 1 in blue, Class 2 in red
+</span>    <span class="n">class1_mask</span> <span class="o">=</span> <span class="n">trainclass</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">class2_mask</span> <span class="o">=</span> <span class="n">trainclass</span> <span class="o">==</span> <span class="mi">2</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">traindata</span><span class="p">[</span><span class="n">class1_mask</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">traindata</span><span class="p">[</span><span class="n">class1_mask</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Class 1</span><span class="sh">'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">traindata</span><span class="p">[</span><span class="n">class2_mask</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">traindata</span><span class="p">[</span><span class="n">class2_mask</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Class 2</span><span class="sh">'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+    <span class="c1"># Highlight support vectors with black circles
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">svs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">svs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">facecolors</span><span class="o">=</span><span class="sh">'</span><span class="s">none</span><span class="sh">'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">,</span>
+                <span class="n">s</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Support Vectors</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># Create a fine grid to evaluate the decision function
+</span>    <span class="n">xlim</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">xlim</span><span class="p">()</span>
+    <span class="n">ylim</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">ylim</span><span class="p">()</span>
+    <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="n">xlim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xlim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">200</span><span class="p">),</span>
+                         <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="n">ylim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">200</span><span class="p">))</span>
+
+    <span class="c1"># Evaluate decision function on every point in the grid
+</span>    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="p">.</span><span class="nf">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="p">.</span><span class="nf">ravel</span><span class="p">()]</span>
+    <span class="n">K_grid</span> <span class="o">=</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">svs</span><span class="p">)</span>
+    <span class="n">decision_scores</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">K_grid</span><span class="p">,</span> <span class="n">alphas</span> <span class="o">*</span> <span class="n">sv_classes</span><span class="p">)</span> <span class="o">+</span> <span class="n">w0</span>
+    <span class="n">decision_scores</span> <span class="o">=</span> <span class="n">decision_scores</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="n">xx</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># Plot the decision boundary (where decision_score = 0)
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">decision_scores</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="sh">'</span><span class="s">solid</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="c1"># Plot the margins (where decision_score = ±1)
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">decision_scores</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">linewidths</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="sh">'</span><span class="s">dashed</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Fill the decision regions with light colors
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">decision_scores</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">],</span>
+                 <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">lightblue</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">lightcoral</span><span class="sh">'</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Nonlinear SVM with Polynomial Kernel</span><span class="sh">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="sh">'</span><span class="s">bold</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Feature 1</span><span class="sh">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Feature 2</span><span class="sh">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="sh">'</span><span class="s">best</span><span class="sh">'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div> <h3 id="step-5-putting-it-all-together">Step 5: Putting It All Together</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Example usage
+</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="c1"># Load your data (replace with actual data loading)
+</span>    <span class="c1"># Example of data set ono my github:
+</span>    <span class="c1"># traindata = np.loadtxt('t030.csv', delimiter=',', usecols=(0,1))
+</span>    <span class="c1"># trainclass = np.loadtxt('t030.csv', delimiter=',', usecols=(2,))
+</span>
+    <span class="c1">#Famous Example of cirular rings to show importance of kernel trick
+</span>
+    <span class="c1"># reproducibility
+</span>    <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+    <span class="c1"># Generate circular data
+</span>    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">radius1</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">radius2</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="c1"># Inner circle (class 1)
+</span>    <span class="n">theta1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">radius1</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">column_stack</span><span class="p">([</span><span class="n">r1</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">),</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta1</span><span class="p">)])</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Outer ring (class 2)
+</span>    <span class="n">theta2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="n">radius1</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">radius2</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">column_stack</span><span class="p">([</span><span class="n">r2</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">),</span> <span class="n">r2</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">sin</span><span class="p">(</span><span class="n">theta2</span><span class="p">)])</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">n_samples</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">traindata</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">vstack</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">])</span>
+    <span class="n">trainclass</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">hstack</span><span class="p">([</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">])</span>
+
+    <span class="c1"># Train the SVM
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Training Nonlinear SVM...</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span> <span class="o">=</span> <span class="nf">svm_nonlinear</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Number of support vectors: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">svs</span><span class="p">)</span><span class="si">}</span><span class="s"> out of </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">traindata</span><span class="p">)</span><span class="si">}</span><span class="s"> training samples</span><span class="sh">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Bias term (w0): </span><span class="si">{</span><span class="n">w0</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="c1"># Visualize
+</span>    <span class="nf">plot_decision_boundary</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span>
+
+    <span class="c1"># Make predictions on training data
+</span>    <span class="n">predictions</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="nf">predict_svm</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">((</span><span class="n">predictions</span> <span class="o">==</span> <span class="n">np</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">trainclass</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Training accuracy: </span><span class="si">{</span><span class="n">accuracy</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">%</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <hr> <p>Results from that randomly generated samples with rings of points: famous example showing importance of kernel trick</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/svm_image-480.webp 480w,/Wiredu2020/assets/img/svm_image-800.webp 800w,/Wiredu2020/assets/img/svm_image-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/svm_image.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> </div> <hr> <h2 id="understanding-the-output">Understanding the Output</h2> <p>When you run this code, you’ll see:</p> <ol> <li> <p><strong>Support Vectors</strong>: Typically only a small fraction of training points become support vectors. These are the “critical” points that define the boundary.</p> </li> <li> <p><strong>Decision Boundary</strong>: The black solid line shows where the classifier switches between classes (decision_score = 0).</p> </li> <li> <p><strong>Margins</strong>: The dashed lines show the margin boundaries (decision_score = $\pm 1$). Support vectors lie on or within these margins.</p> </li> <li> <p><strong>Decision Regions</strong>: The shaded areas show which class the SVM predicts for each region of space.</p> </li> </ol> <hr> <h2 id="hyperparameter-tuning-tips">Hyperparameter Tuning Tips</h2> <h3 id="comparative-analysis-choosing-c-regularization-parameter">Comparative analysis: Choosing C (Regularization Parameter)</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try different C values
+</span><span class="n">C_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">C_values</span><span class="p">:</span>
+    <span class="n">svs</span><span class="p">,</span> <span class="n">sv_classes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">w0</span> <span class="o">=</span> <span class="nf">svm_nonlinear</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">C=</span><span class="si">{</span><span class="n">C</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="nf">len</span><span class="p">(</span><span class="n">svs</span><span class="p">)</span><span class="si">}</span><span class="s"> support vectors</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div> <ul> <li> <strong>Small C</strong> $(0.01-0.1)$: More support vectors, wider margin, better generalization</li> <li> <strong>Large C</strong> $(10-100)$: Fewer support vectors, narrower margin, risk of overfitting</li> </ul> <h3 id="choosing-polynomial-degree">Choosing Polynomial Degree</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Modify the kernel function to accept different degrees
+</span><span class="k">def</span> <span class="nf">svm_with_degree</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">trainclass</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
+    <span class="c1"># Modify polynomial_kernel calls to use specified degree
+</span>    <span class="n">K</span> <span class="o">=</span> <span class="nf">polynomial_kernel</span><span class="p">(</span><span class="n">traindata</span><span class="p">,</span> <span class="n">traindata</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+    <span class="c1">#  training codes ...
+</span></code></pre></div></div> <ul> <li> <strong>degree=2</strong>: Good starting point for most problems</li> <li> <strong>degree=3-4</strong>: More complex boundaries, risk of overfitting</li> <li> <strong>degree&gt;5</strong>: Rarely useful, very high computational cost</li> </ul> <hr> <h2 id="common-pitfalls-and-solutions">Common Pitfalls and Solutions</h2> <h3 id="1-numerical-instability">1. Numerical Instability</h3> <p><strong>Problem</strong>: Kernel values become too large or too small <strong>Solution</strong>: Feature normalization</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="nc">StandardScaler</span><span class="p">()</span>
+<span class="n">traindata</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="nf">fit_transform</span><span class="p">(</span><span class="n">traindata</span><span class="p">)</span>
+</code></pre></div></div> <h3 id="2-all-points-become-support-vectors">2. All Points Become Support Vectors</h3> <p><strong>Problem</strong>: C is too large or data has no clear separation <strong>Solution</strong>: Reduce C or try a different kernel</p> <h3 id="3-poor-performance">3. Poor Performance</h3> <p><strong>Problem</strong>: Wrong kernel choice or bad hyperparameters <strong>Solution</strong>: Use cross-validation to tune C and kernel parameters</p> <h3 id="4-slow-training">4. Slow Training</h3> <p><strong>Problem</strong>: Dataset is too large <strong>Solution</strong>: Consider using scikit-learn’s SVC with better optimization or subsample the data</p> <hr> <h2 id="extending-this-implementation">Extending This Implementation</h2> <p>Want to take this further? Try:</p> <ol> <li> <strong>Implement RBF kernel</strong>: Replace polynomial with Gaussian kernel</li> <li> <strong>Add cross-validation</strong>: Use k-fold CV to select optimal C</li> <li> <strong>Multi-class classification</strong>: Extend to handle more than two classes using one-vs-rest or one-vs-one</li> <li> <strong>Feature importance</strong>: Analyze which support vectors contribute most</li> <li> <strong>Compare with sklearn</strong>: Validate your implementation against scikit-learn</li> </ol> <hr> <h2 id="conclusion">Conclusion</h2> <p>Support Vector Machines provide an elegant combination of:</p> <ul> <li> <strong>Geometric intuition</strong> (maximum margin principle)</li> <li> <strong>Mathematical rigor</strong> (convex optimization)</li> <li> <strong>Practical power</strong> (kernel trick for nonlinearity)</li> </ul> <p>By implementing SVM from scratch, we gain deep insights into:</p> <ul> <li>How the optimization problem is formulated</li> <li>Why support vectors are special</li> <li>How kernels enable nonlinear classification without explicit feature transformation</li> </ul> <p>While libraries like scikit-learn offer highly optimized implementations, understanding the fundamentals helps you make better choices about when and how to apply SVMs in practice.</p> <hr> <h2 id="references-and-further-reading">References and Further Reading</h2> <ul> <li> <strong>Original SVM Papers</strong>: Cortes, C., &amp; Vapnik, V. (1995) “Support-vector networks” Machine Learning, 20(3), 273-297. [The original paper introducing Support Vector Machines]</li> <li> <strong>Kernel Methods</strong>: Schölkopf, B., &amp; Smola, A. J. (2002) “Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond” MIT Press, Cambridge, MA.</li> <li> <strong>Practical Guide</strong>: Hsu, C. W., Chang, C. C., &amp; Lin, C. J. (2003) “A Practical Guide to Support Vector Classification” Technical Report, Department of Computer Science, National Taiwan University. Available: https://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf [Essential practical guide for parameter selection and implementation]</li> <li> <strong>Bayesian perceptive</strong>: “Pattern Recognition and Machine Learning” Springer, New York. Chapter 7: Sparse Kernel Machines [Modern treatment with Bayesian perspective] Cristianini, N., &amp; Shawe-Taylor, J. (2000)</li> <li> <strong>Implementation</strong>: <a href="scikit-learn%20SVM%20documentation">https://scikit-learn.org/stable/modules/svm.html</a> </li> </ul> <hr> <h2 id="code-repository">Code Repository</h2> <p>The complete implementation with example datasets is available on <a href="GitHub%20-SVM">https://github.com/OLIVIERKANAMUGIRE/Support-Vector-Machines-from-Scratch</a></p> <p>Dataset used: <code class="language-plaintext highlighter-rouge">t030.csv</code> - A small nonlinearly separable 2D dataset for demonstration.</p> <hr> <p><em>Happy learning! If you have questions or suggestions, feel free to reach out or open an issue on GitHub.</em></p> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/" target="_blank" rel="noopener noreferrer">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2" target="_blank" rel="noopener noreferrer">Displaying External Posts on Your al-folio Blog</a> <svg width="1rem" height="1rem" viewbox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path> </svg> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svd_blog_extended/">Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/logistic_regression/">Logistic Regression for Ultrasonic Flow Meter Health Classification</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/optimizationAlgorithm/">On the optimization algorithms and learning rate</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/graphNN/">Graphs and Graph Neural Nets</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/knn/">K-Nearest Neighbor (KNN) -- How your closest connections define you!</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Bright Wiredu Nuakoh. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/Wiredu2020/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/Wiredu2020//assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/Wiredu2020/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/Wiredu2020/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/Wiredu2020/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/Wiredu2020/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/Wiredu2020/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020//assets/al_img_tools/js/zoom.js"></script> <script defer src="/Wiredu2020/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/Wiredu2020//assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/Wiredu2020//assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/Wiredu2020/";
+    },
+  },{id: "nav-blogs",
+          title: "blogs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications and theses.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A growing collection of your cool projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/projects/";
+          },
+        },{id: "nav-repos",
+          title: "repos",
+          description: "Relevant Repositories.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/cv/";
+          },
+        },{id: "nav-teaching-experience",
+          title: "teaching experience",
+          description: "Tutor Fellow - AIMS Rwanda | Teaching Assistant - Mathematic Department, University of Ghana",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/teaching/";
+          },
+        },{id: "post-nonlinear-support-vector-machine-svm-with-polynomial-kernel",
+        
+          title: "Nonlinear Support Vector Machine (SVM) with Polynomial Kernel",
+        
+        description: "Nonlinear support vector machine from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svm/";
+          
+        },
+      },{id: "post-singular-value-decomposition-for-hyperspectral-image-dimensionality-reduction",
+        
+          title: "Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction",
+        
+        description: "Understanding SVD theory and applying it to hyperspectral imaging - A comprehensive guide",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svd_blog_extended/";
+          
+        },
+      },{id: "post-logistic-regression-for-ultrasonic-flow-meter-health-classification",
+        
+          title: "Logistic Regression for Ultrasonic Flow Meter Health Classification",
+        
+        description: "Binary classification of ultrasonic flow meter health using logistic regression and numerical optimization",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/logistic_regression/";
+          
+        },
+      },{id: "post-on-the-optimization-algorithms-and-learning-rate",
+        
+          title: "On the optimization algorithms and learning rate",
+        
+        description: "Gradient descent (GD), Stochastic GD, Adam optimizer",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/optimizationAlgorithm/";
+          
+        },
+      },{id: "post-graphs-and-graph-neural-nets",
+        
+          title: "Graphs and Graph Neural Nets",
+        
+        description: "Graphs, Adjacency Matrix, Graph Neural Nets",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/graphNN/";
+          
+        },
+      },{id: "post-k-nearest-neighbor-knn-how-your-closest-connections-define-you",
+        
+          title: "K-Nearest Neighbor (KNN) -- How your closest connections define you!",
+        
+        description: "KNN algorithm from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/knn/";
+          
+        },
+      },{id: "post-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
+        
+          title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/", "_blank");
+          
+        },
+      },{id: "post-displaying-external-posts-on-your-al-folio-blog",
+        
+          title: 'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2", "_blank");
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/Wiredu2020/books/the_godfather/";
+            },},{id: "news-nothing-exciting-to-share-for-now",
+          title: 'Nothing exciting to share for now.',
+          description: "",
+          section: "News",},{id: "projects-3d-computer-vision-amp-robotics",
+          title: '3D Computer Vision &amp;amp; Robotics',
+          description: "Robotic Workspace Calibration and Object Localization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/1_project/";
+            },},{id: "projects-3d-reconstruction-for-wildlife-re-identification",
+          title: '3D Reconstruction for Wildlife Re-identification',
+          description: "Deep Learning for Animal Identification from 2D Images",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/2_project/";
+            },},{id: "projects-super-resolution-for-satellite-imagery",
+          title: 'Super-Resolution for Satellite Imagery',
+          description: "Deep Learning Methods for Enhanced Satellite Image Resolution",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/3_project/";
+            },},{id: "projects-ai-follow-up-agent",
+          title: 'AI Follow-up Agent',
+          description: "Autonomous LLM-based Task Management System",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/4_project/";
+            },},{id: "projects-intelligent-chatbot-system",
+          title: 'Intelligent Chatbot System',
+          description: "End-to-End Conversational AI Application",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/5_project/";
+            },},{id: "projects-traffic-flow-analysis-system",
+          title: 'Traffic Flow Analysis System',
+          description: "Time-Series Analysis of Urban Traffic Patterns",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/6_project/";
+            },},{id: "projects-solar-system-simulation",
+          title: 'Solar System Simulation',
+          description: "Physics-based N-Body System Visualization",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/7_project/";
+            },},{id: "projects-full-stack-web-applications",
+          title: 'Full-Stack Web Applications',
+          description: "End-to-End Web Development with Django and Modern Frontend",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/8_project/";
+            },},{id: "projects-machine-learning-algorithms-implementation",
+          title: 'Machine Learning Algorithms Implementation',
+          description: "From-Scratch Implementations of Core ML Algorithms",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/9_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/Wiredu2020/assets/pdf/CV.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%69%67%68%74.%77%69%72%65%64%75@%61%69%6D%73.%61%63.%72%77", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0001-2345-3817", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Wiredu2020", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/bright-wiredu-nuakoh-b24b02214", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=XplLiE4AAAAJ&hl", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/Wiredu2020//assets/al_search/js/shortcut-key.js"></script> </body> </html>
