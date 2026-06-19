@@ -2,7 +2,7 @@
 layout: page
 title: 3D Computer Vision & Robotics
 description: Calibrating the robot's environment using camera calibration with DLT, followed by cube picking and transporting it to a designated location
-img: assets/img/robotic-vision/1.png
+img: assets/img/robotic-vision/3.png
 importance: 1
 category: research
 related_publications: false
@@ -29,10 +29,10 @@ related_publications: false
 <h3>🔲 2D View of Localized Points (Z Flattened)</h3>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/robotic-vision/1.png" title="2D Plot of Localized Points" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/3dplot.png" title="2D Plot of Localized Points" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/robotic-vision/2.png" title="2D Plot of Localized Points" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/newplot.png" title="2D Plot of Localized Points" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -40,7 +40,7 @@ related_publications: false
 <p>The following 3D plot visualizes the spatial relationship between robot components and objects:</p>
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/robotic-vision/3.png" title="3D Point Plot" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/3dplot.png" title="3D Point Plot" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
