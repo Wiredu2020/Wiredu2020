@@ -10,7 +10,16 @@ related_publications: false
 
 Facial biometric analysis pipeline combining deep learning classifiers, classical feature extraction (CLAHE + PCA), and a Flask inference API — trained on the FER dataset across 7 emotion classes.
 
-🔗 GitHub: [Wiredu2020/Advanced-CVPR-For-Biometrics](https://github.com/Wiredu2020/Advanced-CVPR-For-Biometrics/)
+
+<div class="row justify-content-center mb-4">
+  <div class="col-auto">
+    <a href="https://github.com/Wiredu2020/Advanced-CVPR-For-Biometrics/" target="_blank" class="btn btn-sm z-depth-1" style="background:#24292e;color:white;border:none;padding:7px 18px;border-radius:6px;font-size:13px;">
+      <i class="fab fa-github me-1"></i> GitHub
+    </a>
+  </div>
+</div>
+
+---
 
 ---
 
@@ -56,13 +65,7 @@ Training used `ReduceLROnPlateau`, `EarlyStopping`, and `ModelCheckpoint` with A
 
 Compared against EfficientNetB3 on the same FER pipeline. Used as a baseline to evaluate transfer learning depth vs. breadth trade-offs for low-resolution facial images (96×96).
 
----
 
-## 🌊 Neural ODE Dynamics
-
-The repo extends the classification pipeline with a **Neural ODE** component (`torchdiffeq`, `dopri5` solver) to model continuous-time feature evolution — framing the latent representation as an ODE rather than a fixed-depth network.
-
----
 
 ## 🖼️ Classical CV Pipeline
 
@@ -82,5 +85,3 @@ POST /predict  →  { "emotion": "happy", "confidence": 0.87 }
 ---
 
 ## 📓 Notebook
-
-{% jupyter_notebook "assets/jupyter/biomet.ipynb" %}
