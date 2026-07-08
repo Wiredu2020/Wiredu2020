@@ -1,0 +1,257 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> How Wide Does a Permutation-Invariant Bottleneck Need to Be? | Bright Wiredu </title> <meta name="author" content="Bright Wiredu Nuakoh"> <meta name="description" content="Deriving the DeepSets universal approximation theorem via symmetric polynomials, and testing its prediction empirically"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/Wiredu2020/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/Wiredu2020/assets/img/favicon.ico?v=113bf03c0ecd43b1794a60b109bf8ab8"> <link rel="stylesheet" href="/Wiredu2020/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://wiredu2020.github.io/Wiredu2020/blog/2026/deepsets-universal-approximation/"> <script src="/Wiredu2020/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/Wiredu2020/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/Wiredu2020//"> Bright Wiredu </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/Wiredu2020/blog/">blogs </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/repositories/">repos </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/Wiredu2020/teaching/">teaching experience </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">How Wide Does a Permutation-Invariant Bottleneck Need to Be?</h1> <p class="post-meta"> Created on July 08, 2026 </p> <p class="post-tags"> <a href="/Wiredu2020/blog/2026"> <i class="fa-solid fa-calendar fa-sm"></i> 2026 </a>   ·   <a href="/Wiredu2020/blog/tag/theory"> <i class="fa-solid fa-hashtag fa-sm"></i> theory</a>   <a href="/Wiredu2020/blog/tag/generative-models"> <i class="fa-solid fa-hashtag fa-sm"></i> generative-models</a>   <a href="/Wiredu2020/blog/tag/set-functions"> <i class="fa-solid fa-hashtag fa-sm"></i> set-functions</a>   ·   <a href="/Wiredu2020/blog/category/sample-posts"> <i class="fa-solid fa-tag fa-sm"></i> sample-posts</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>Generative models over point clouds, molecules, and graphs share a structural requirement that models over images or sequences don’t have: the network has to be <strong>invariant</strong> (or equivariant) under permutations of its input elements, because a set has no canonical order. The standard recipe for building such a network — used, in one guise or another, in DeepSets, PointNet, and most Graph Neural Network message-passing layers — is:</p> \[f(x_1, \dots, x_M) = \rho\Big(\sum_{i=1}^{M} \phi(x_i)\Big)\] <p>Each element is embedded independently by a shared map $\phi$, the embeddings are pooled by a symmetric operation (sum, in this post; mean in practice, which is just a rescaling), and a second map $\rho$ turns the pooled vector into the output. Summing is trivially permutation-invariant, so this architecture is invariant <em>by construction</em> — but that raises an immediate question: <strong>is every permutation-invariant function representable this way, and if so, how wide does $\phi$’s output need to be?</strong></p> <p>This turns out to have a clean, exact answer for an important special case, and the answer is not “wider is always better” — the required width is tied directly to how many elements the set can contain. This post derives that answer, then tests its qualitative prediction on the pooled architecture used in the <a href="/Wiredu2020/projects/5_project/">companion point-cloud flow-matching project</a>.</p> <h2 id="the-claim-deepsets-informally">The claim (DeepSets, informally)</h2> <p>Zaheer et al. (<a href="https://arxiv.org/abs/1703.06114" rel="external nofollow noopener" target="_blank">2017</a>) show that for elements drawn from a countable universe, <em>every</em> permutation-invariant function of a set can be written in the sum-decomposition form above, for <em>some</em> choice of $\phi$ and $\rho$ (their construction encodes each element as a distinct power of 4 so that the sum can be uniquely decoded back into the original multiset — clever, but not the kind of $\phi$ you’d want to actually learn). What we want instead is a statement that (a) is fully constructive, (b) tells us how wide $\phi$’s output needs to be, and (c) is provably <em>tight</em> — i.e., that going narrower provably loses information. Wagstaff et al. (<a href="https://arxiv.org/abs/1901.09006" rel="external nofollow noopener" target="_blank">2019</a>) prove exactly this for general continuous invariant functions. Rather than reproduce their (more technical) argument, the rest of this post derives the same conclusion for the case of <strong>symmetric polynomials</strong>, where the whole thing follows from a 19th-century fact about polynomials and is fully rigorous.</p> <h2 id="the-exact-case-symmetric-polynomials">The exact case: symmetric polynomials</h2> <p>Let $x = (x_1, \dots, x_M) \in \mathbb{R}^M$ be a set (with repeats allowed) of $M$ real numbers. A function $q(x_1, \dots, x_M)$ is called <em>symmetric</em> if it’s unchanged by permuting its arguments — exactly the invariance property we want.</p> <p>Define the <strong>power sums</strong></p> \[p_k = \sum_{i=1}^{M} x_i^k, \qquad k = 1, \dots, M,\] <p>and the <strong>elementary symmetric polynomials</strong></p> \[e_1 = \sum_i x_i, \quad e_2 = \sum_{i&lt;j} x_i x_j, \quad \dots, \quad e_M = x_1 x_2 \cdots x_M.\] <p>Two classical facts, together, give us everything we need:</p> <p><strong>1. The fundamental theorem of symmetric polynomials.</strong> Every symmetric polynomial in $x_1, \dots, x_M$ can be written as a polynomial in $e_1, \dots, e_M$ — and this representation is unique. In other words, $(e_1, \dots, e_M)$ is a complete, non-redundant set of coordinates for the space of symmetric polynomials.</p> <p><strong>2. Newton’s identities.</strong> The power sums and elementary symmetric polynomials determine each other through the recursion</p> \[p_k = e_1 p_{k-1} - e_2 p_{k-2} + \cdots + (-1)^{k-2} e_{k-1} p_1 + (-1)^{k-1} k\, e_k, \qquad k \le M.\] <p>Because the coefficient of $e_k$ is $\pm k \ne 0$, this recursion can be solved for $e_k$ given $e_1, \dots, e_{k-1}$ and $p_1, \dots, p_k$ — so $(p_1, \dots, p_M)$ determines $(e_1, \dots, e_M)$ exactly as well as the other way around.</p> <p><strong>Putting them together:</strong> set $\phi(x) = (x, x^2, \dots, x^M) \in \mathbb{R}^M$. Then</p> \[\sum_{i=1}^M \phi(x_i) = (p_1, \dots, p_M),\] <p>and by Newton’s identities there is a fixed, invertible polynomial map $E$ with $(e_1, \dots, e_M) = E(p_1, \dots, p_M)$. By the fundamental theorem, any symmetric polynomial $q$ equals some polynomial $P$ applied to $(e_1,\dots,e_M)$. So</p> \[q(x_1, \dots, x_M) = \underbrace{P \circ E}_{=: \rho}\Big(\sum_{i=1}^M \phi(x_i)\Big),\] <p>exactly the DeepSets sum-decomposition — with a $\phi$ that is <em>fixed and universal</em> (it doesn’t depend on $q$ at all) and an $M$-dimensional bottleneck. Since polynomials are dense in continuous functions on compact domains (Stone–Weierstrass), and symmetrizing preserves that density, this sum-decomposition with a width-$M$ bottleneck can approximate <strong>any</strong> continuous permutation-invariant function of $M$ elements arbitrarily well.</p> <h2 id="why-you-cant-go-narrower">Why you can’t go narrower</h2> <p>Suppose the bottleneck has width $L &lt; M$, i.e. $\phi: \mathbb{R} \to \mathbb{R}^L$. The map $\Phi(x_1,\dots,x_M) = \sum_i \phi(x_i)$ then sends an $M$-dimensional input to an $L$-dimensional summary, $L &lt; M$. Generically, this cannot be injective on sets of $M$ elements: there is a positive-dimensional family of <em>different</em> multisets that $\Phi$ collapses to the <em>same</em> point in $\mathbb{R}^L$, no matter how $\phi$ is chosen. Since $\rho$ only ever sees $\Phi(x)$, it must give the same output for every multiset in such a collision — so any permutation-invariant target function that actually varies within that family cannot be represented, no matter how expressive $\rho$ is. This is the essence of Wagstaff et al.’s impossibility result.</p> <p>A concrete instance with $L = 1$ (only the sum, $\phi(x) = x$): the sets ${1, 1, 4}$ and ${2, 2, 2}$ have the same sum ($p_1 = 6$), so any $\rho(\text{sum})$ must output the same value for both. But the <strong>variance</strong> — a perfectly ordinary permutation-invariant function — is $2$ for the first set and $0$ for the second. A width-1 bottleneck provably cannot represent variance; you need at least $p_2$ (equivalently, $L=2$) to tell these two sets apart at all.</p> <h2 id="testing-the-qualitative-prediction">Testing the qualitative prediction</h2> <p>The <a href="/Wiredu2020/projects/5_project/">point-cloud flow-matching model</a> uses exactly this pooling architecture (with a mean instead of a sum, and MLPs instead of the exact power/Newton maps) to predict a velocity field over sets of points. Its pooled context vector is the same kind of bottleneck analyzed above. Retraining the same model with context widths $2^0$ through $2^6$ and measuring the Chamfer distance between generated and real point sets:</p> <figure> <picture> <source class="responsive-img-srcset" srcset="/Wiredu2020/assets/img/point-flow-matching/context_dim_ablation-480.webp 480w,/Wiredu2020/assets/img/point-flow-matching/context_dim_ablation-800.webp 800w,/Wiredu2020/assets/img/point-flow-matching/context_dim_ablation-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/Wiredu2020/assets/img/point-flow-matching/context_dim_ablation.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" title="Sample quality vs context width" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <p>Quality degrades sharply for widths below about 4, then plateaus. This is exactly the qualitative shape the theory predicts: a bottleneck that’s too narrow provably discards information no $\rho$ can recover, so quality should drop off once width falls below whatever the task actually requires — and adding width beyond that point should stop helping, since there’s nothing left to gain. It’s worth being precise about what this experiment does and doesn’t show, though: the theorem above gives a <em>sufficient</em> (and, for polynomials, tight) bound of $M$ for representing <em>arbitrary</em> invariant functions of $M$ elements — here $M$ is up to 64, far more than the widths tested. The four shape families in this experiment are a much lower-complexity target than “an arbitrary symmetric function of 64 points,” so it’s entirely consistent with the theory that a far smaller bottleneck already saturates: the theorem bounds the worst case, not this specific, simple data distribution. What the ablation does confirm is the qualitative mechanism — too narrow a bottleneck measurably hurts, in a way that lines up with a real information bottleneck rather than an optimization artifact.</p> <h2 id="why-this-matters-beyond-toy-shapes">Why this matters beyond toy shapes</h2> <p>The same pooling structure underlies most permutation-invariant and permutation-equivariant architectures used on graphs — message-passing GNNs aggregate neighbor features through an analogous sum/mean bottleneck at every layer. The question this post works through for a simple polynomial case — <em>what is the actual capacity constraint imposed by a symmetric pooling operation, and how does it scale with the size of the set being pooled over?</em> — is a special case of a more general one: characterizing exactly what structural properties an invariant or equivariant architecture needs in order to generalize and remain valid as the size of its input grows. That is a considerably harder question once you replace “sum over a flat set” with “aggregate over a graph’s neighborhood structure,” and it’s the kind of question that determines whether a model trained on small graphs (or small point clouds) can be trusted at all on larger ones.</p> <p><strong>References</strong></p> <ul> <li>Zaheer, M. et al. <a href="https://arxiv.org/abs/1703.06114" rel="external nofollow noopener" target="_blank">Deep Sets</a>. NeurIPS 2017.</li> <li>Wagstaff, E. et al. <a href="https://arxiv.org/abs/1901.09006" rel="external nofollow noopener" target="_blank">On the Limitations of Representing Functions on Sets</a>. ICML 2019.</li> <li>Lipman, Y. et al. <a href="https://arxiv.org/abs/2210.02747" rel="external nofollow noopener" target="_blank">Flow Matching for Generative Modeling</a>. ICLR 2023.</li> </ul> </div> </article> <br> <hr> <br> <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2> <p class="mb-2">Here are some more articles you might like to read next:</p> <ul class="list-disc pl-7 my-3 space-y-2 marker:text-[var(--global-theme-color)]"> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svm/">Nonlinear Support Vector Machine (SVM) with Polynomial Kernel</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/svd_blog_extended/">Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/logistic_regression/">Logistic Regression for Ultrasonic Flow Meter Health Classification</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2025/optimizationAlgorithm/">On the optimization algorithms and learning rate</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/graphNN/">Graphs and Graph Neural Nets</a> </li> <li class="leading-relaxed"> <a class="underline decoration-1 hover:text-[var(--global-hover-color)]" href="/Wiredu2020/blog/2024/knn/">K-Nearest Neighbor (KNN) -- How your closest connections define you!</a> </li> </ul> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Bright Wiredu Nuakoh. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/Wiredu2020/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/Wiredu2020//assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/Wiredu2020/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/Wiredu2020/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/Wiredu2020/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/Wiredu2020/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/Wiredu2020/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/Wiredu2020//assets/al_img_tools/js/zoom.js"></script> <script defer src="/Wiredu2020/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/Wiredu2020//assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/Wiredu2020//assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/Wiredu2020/";
+    },
+  },{id: "nav-blogs",
+          title: "blogs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/blog/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "Publications and theses.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Personal and University projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/projects/";
+          },
+        },{id: "nav-repos",
+          title: "repos",
+          description: "Relevant Repositories.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/repositories/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/cv/";
+          },
+        },{id: "nav-teaching-experience",
+          title: "teaching experience",
+          description: "Tutor Fellow - AIMS Rwanda | Teaching Assistant - Mathematic Department, University of Ghana",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/Wiredu2020/teaching/";
+          },
+        },{id: "post-how-wide-does-a-permutation-invariant-bottleneck-need-to-be",
+        
+          title: "How Wide Does a Permutation-Invariant Bottleneck Need to Be?",
+        
+        description: "Deriving the DeepSets universal approximation theorem via symmetric polynomials, and testing its prediction empirically",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2026/deepsets-universal-approximation/";
+          
+        },
+      },{id: "post-nonlinear-support-vector-machine-svm-with-polynomial-kernel",
+        
+          title: "Nonlinear Support Vector Machine (SVM) with Polynomial Kernel",
+        
+        description: "Nonlinear support vector machine from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svm/";
+          
+        },
+      },{id: "post-singular-value-decomposition-for-hyperspectral-image-dimensionality-reduction",
+        
+          title: "Singular Value Decomposition for Hyperspectral Image Dimensionality Reduction",
+        
+        description: "Understanding SVD theory and applying it to hyperspectral imaging - A comprehensive guide",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/svd_blog_extended/";
+          
+        },
+      },{id: "post-logistic-regression-for-ultrasonic-flow-meter-health-classification",
+        
+          title: "Logistic Regression for Ultrasonic Flow Meter Health Classification",
+        
+        description: "Binary classification of ultrasonic flow meter health using logistic regression and numerical optimization",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/logistic_regression/";
+          
+        },
+      },{id: "post-on-the-optimization-algorithms-and-learning-rate",
+        
+          title: "On the optimization algorithms and learning rate",
+        
+        description: "Gradient descent (GD), Stochastic GD, Adam optimizer",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2025/optimizationAlgorithm/";
+          
+        },
+      },{id: "post-graphs-and-graph-neural-nets",
+        
+          title: "Graphs and Graph Neural Nets",
+        
+        description: "Graphs, Adjacency Matrix, Graph Neural Nets",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/graphNN/";
+          
+        },
+      },{id: "post-k-nearest-neighbor-knn-how-your-closest-connections-define-you",
+        
+          title: "K-Nearest Neighbor (KNN) -- How your closest connections define you!",
+        
+        description: "KNN algorithm from scratch",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/Wiredu2020/blog/2024/knn/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/Wiredu2020/books/the_godfather/";
+            },},{id: "news-nothing-exciting-to-share-for-now",
+          title: 'Nothing exciting to share for now.',
+          description: "",
+          section: "News",},{id: "projects-3d-computer-vision-amp-robotics",
+          title: '3D Computer Vision &amp;amp; Robotics',
+          description: "Calibrating the robot&#39;s environment using camera calibration with DLT, followed by cube picking and transporting it to a designated location",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/1_project/";
+            },},{id: "projects-ai-voice-agent",
+          title: 'AI Voice Agent',
+          description: "Real-time AI voice agent for document review built with LiveKit and LLMs",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/2_project/";
+            },},{id: "projects-full-stack-web-development",
+          title: 'Full-Stack Web Development',
+          description: "Building scalable web applications with Django, FastAPI, and modern frontend technologies",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/3_project/";
+            },},{id: "projects-advanced-cvpr-for-biometrics",
+          title: 'Advanced CVPR for Biometrics',
+          description: "Facial Emotion Recognition using EfficientNetB3, VGG16, and classical CV pipelines",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/4_project/";
+            },},{id: "projects-set-based-flow-matching-for-point-cloud-generation",
+          title: 'Set-Based Flow Matching for Point-Cloud Generation',
+          description: "A permutation-equivariant flow-matching model that generates point sets of any size, with an ablation tying sample quality to pooling width",
+          section: "Projects",handler: () => {
+              window.location.href = "/Wiredu2020/projects/5_project/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/Wiredu2020/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/Wiredu2020/assets/pdf/CV.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%62%72%69%67%68%74.%77%69%72%65%64%75@%61%69%6D%73.%61%63.%72%77", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0001-2345-3817", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Wiredu2020", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/bright-wiredu-nuakoh-b24b02214", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=XplLiE4AAAAJ&hl", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/Wiredu2020//assets/al_search/js/shortcut-key.js"></script> </body> </html>
