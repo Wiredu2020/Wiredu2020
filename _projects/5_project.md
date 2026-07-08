@@ -49,8 +49,6 @@ related_publications: false
 </div>
 <p>Quality degrades sharply below a context width of about 4, then plateaus &mdash; consistent with the theoretical prediction that a sufficiently wide pooling bottleneck is necessary (and, past a point, no longer the limiting factor) for representing the relevant permutation-invariant summary of the point set.</p>
 
-<h2>⚠️ Honest limitations</h2>
-<p>This is a toy demo (2D synthetic shapes, CPU-only, a few thousand training steps) meant to make the invariance/size-transferability properties easy to see and reason about, not a state-of-the-art point-cloud generator. The model is conditioned on a discrete shape id to get crisp results in a small compute budget; the invariance and size-transferability properties themselves do not depend on this.</p>
 
 <h2>💻 Code</h2>
 <p>Full implementation: <a href="https://github.com/Wiredu2020/3D-Computer-Vision-And-Robotics/tree/main/PointCloudFlowMatching" target="_blank" rel="noopener">PointCloudFlowMatching</a> on GitHub.</p>
