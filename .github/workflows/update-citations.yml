@@ -59,6 +59,7 @@ jobs:
             echo "❌ Citation update script failed with exit code $status (started at $start_time, ended at $end_time)."
             echo "❌ Citation update script failed with exit code $status." >> $GITHUB_STEP_SUMMARY
           fi
+          echo "status=$status" >> $GITHUB_OUTPUT
           set -e
 
       - name: Save new citations.yml hash
@@ -85,13 +86,35 @@ jobs:
             echo "ℹ️ _data/citations.yml was not changed." >> $GITHUB_STEP_SUMMARY
           fi
 
-      - name: Configure Git
+      - name: Guard against a bad or truncated result
+        id: guard
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          if [ "${{ steps.run_citation_update.outputs.status }}" != "0" ]; then
+            echo "⛔ Update script failed (exit ${{ steps.run_citation_update.outputs.status }}) — skipping commit to avoid publishing a broken file."
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          lines_before=$(git show HEAD:_data/citations.yml 2>/dev/null | wc -l)
+          lines_after=$(wc -l < _data/citations.yml)
+          echo "Lines before: $lines_before, after: $lines_after"
+          # Refuse to shrink the file by more than 20% — a sign the scrape was rate-limited or blocked.
+          threshold=$(( lines_before * 80 / 100 ))
+          if [ "$lines_before" -gt 0 ] && [ "$lines_after" -lt "$threshold" ]; then
+            echo "⛔ New citations.yml is suspiciously small ($lines_after lines vs $lines_before before) — skipping commit."
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "skip=false" >> $GITHUB_OUTPUT
+
+      - name: Configure Git
+        if: steps.guard.outputs.skip == 'false'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           echo "🔧 Git configured."
 
       - name: Commit and push if changed
+        if: steps.guard.outputs.skip == 'false'
         run: |
           git add _data/citations.yml
           git diff --staged --quiet || (
