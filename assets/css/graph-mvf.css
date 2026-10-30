@@ -1,0 +1,134 @@
+/* purgecss start ignore */
+#graph-mvf {
+  --mv-accent: #176f86;
+  --mv-border: #8a939b;
+  margin: 2rem 0;
+}
+#graph-mvf .mv-notice {
+  border-left: 4px solid var(--mv-accent);
+  padding: 1rem;
+  background: rgba(23, 111, 134, 0.09);
+}
+#graph-mvf .mv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+  margin: 1rem 0;
+}
+#graph-mvf label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+}
+#graph-mvf button,
+#graph-mvf select,
+#graph-mvf input {
+  font: inherit;
+  color: inherit;
+  background: var(--global-bg-color, white);
+  border: 1px solid var(--mv-border);
+  border-radius: 5px;
+  padding: 0.35rem 0.55rem;
+}
+#graph-mvf button {
+  cursor: pointer;
+}
+#graph-mvf button:focus-visible,
+#graph-mvf [tabindex]:focus-visible {
+  outline: 3px solid #d98a00;
+  outline-offset: 3px;
+}
+#graph-mvf .mv-stage {
+  font-weight: 600;
+  padding: 0.7rem;
+  border: 1px solid var(--mv-border);
+  border-radius: 5px;
+}
+#graph-mvf .mv-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+  gap: 1rem;
+}
+#graph-mvf svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--mv-border);
+  border-radius: 8px;
+  background: var(--global-bg-color, white);
+}
+#graph-mvf svg text {
+  font: 12px sans-serif;
+  fill: var(--global-text-color, #222);
+  pointer-events: none;
+}
+#graph-mvf svg .mv-cell {
+  cursor: pointer;
+  stroke-width: 2;
+}
+#graph-mvf .mv-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+#graph-mvf .mv-table {
+  max-height: 300px;
+  overflow: auto;
+}
+#graph-mvf table {
+  width: 100%;
+  font-size: 0.85rem;
+}
+#graph-mvf td,
+#graph-mvf th {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--mv-border);
+}
+#graph-mvf td input {
+  width: 5.4rem;
+}
+#graph-mvf .mv-detail {
+  padding: 1rem;
+  border: 1px solid var(--mv-border);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+#graph-mvf .mv-detail p {
+  margin-bottom: 0.6rem;
+}
+#graph-mvf .mv-equation {
+  font-family: monospace;
+  overflow-wrap: anywhere;
+}
+#graph-mvf .mv-summary {
+  padding: 0.7rem 0;
+}
+#graph-mvf details {
+  margin: 1rem 0;
+}
+#graph-mvf summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  #graph-mvf .mv-workspace,
+  #graph-mvf .mv-comparison {
+    grid-template-columns: 1fr;
+  }
+  #graph-mvf .mv-controls > * {
+    max-width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #graph-mvf * {
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mv-project-animation img {
+    display: none;
+  }
+}
+/* purgecss end ignore */
