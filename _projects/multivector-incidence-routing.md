@@ -3,7 +3,7 @@ layout: page
 title: Topology-Supervised Multivector Incidence Routing for Graph Neural Networks
 description: Exploring topology-supervised incidence routing and multivector message passing in graph neural networks.
 img: assets/img/GraphML/multivector_message_passing.gif
-permalink: /projects/multivector-incidence-routing/
+# permalink: /projects/multivector-incidence-routing/
 importance: 6
 category: research
 related_publications: false
